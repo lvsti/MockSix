@@ -8,12 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		E893A47F1E19A4DA0050638A /* MockSix.h in Headers */ = {isa = PBXBuildFile; fileRef = E893A47D1E19A4DA0050638A /* MockSix.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E893A4871E19A5A20050638A /* MockSix.swift in Sources */ = {isa = PBXBuildFile; fileRef = E893A4851E19A5A20050638A /* MockSix.swift */; };
+		E893A4881E19A5A20050638A /* MockSixInternal.swift in Sources */ = {isa = PBXBuildFile; fileRef = E893A4861E19A5A20050638A /* MockSixInternal.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		E893A47A1E19A4DA0050638A /* MockSix.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MockSix.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E893A47D1E19A4DA0050638A /* MockSix.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MockSix.h; sourceTree = "<group>"; };
 		E893A47E1E19A4DA0050638A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E893A4851E19A5A20050638A /* MockSix.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockSix.swift; sourceTree = "<group>"; };
+		E893A4861E19A5A20050638A /* MockSixInternal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockSixInternal.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +51,8 @@
 			isa = PBXGroup;
 			children = (
 				E893A47D1E19A4DA0050638A /* MockSix.h */,
+				E893A4851E19A5A20050638A /* MockSix.swift */,
+				E893A4861E19A5A20050638A /* MockSixInternal.swift */,
 				E893A47E1E19A4DA0050638A /* Info.plist */,
 			);
 			path = MockSix;
@@ -132,6 +138,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E893A4871E19A5A20050638A /* MockSix.swift in Sources */,
+				E893A4881E19A5A20050638A /* MockSixInternal.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
