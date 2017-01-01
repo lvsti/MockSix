@@ -10,6 +10,12 @@
 		E893A47F1E19A4DA0050638A /* MockSix.h in Headers */ = {isa = PBXBuildFile; fileRef = E893A47D1E19A4DA0050638A /* MockSix.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E893A4871E19A5A20050638A /* MockSix.swift in Sources */ = {isa = PBXBuildFile; fileRef = E893A4851E19A5A20050638A /* MockSix.swift */; };
 		E893A4881E19A5A20050638A /* MockSixInternal.swift in Sources */ = {isa = PBXBuildFile; fileRef = E893A4861E19A5A20050638A /* MockSixInternal.swift */; };
+		E893A4A31E19AE350050638A /* MockSix.swift in Sources */ = {isa = PBXBuildFile; fileRef = E893A4851E19A5A20050638A /* MockSix.swift */; };
+		E893A4A41E19AE360050638A /* MockSix.swift in Sources */ = {isa = PBXBuildFile; fileRef = E893A4851E19A5A20050638A /* MockSix.swift */; };
+		E893A4A51E19AE390050638A /* MockSixInternal.swift in Sources */ = {isa = PBXBuildFile; fileRef = E893A4861E19A5A20050638A /* MockSixInternal.swift */; };
+		E893A4A61E19AE390050638A /* MockSixInternal.swift in Sources */ = {isa = PBXBuildFile; fileRef = E893A4861E19A5A20050638A /* MockSixInternal.swift */; };
+		E893A4A71E19AE450050638A /* MockSix.h in Headers */ = {isa = PBXBuildFile; fileRef = E893A47D1E19A4DA0050638A /* MockSix.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E893A4A81E19AE460050638A /* MockSix.h in Headers */ = {isa = PBXBuildFile; fileRef = E893A47D1E19A4DA0050638A /* MockSix.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -18,10 +24,26 @@
 		E893A47E1E19A4DA0050638A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E893A4851E19A5A20050638A /* MockSix.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockSix.swift; sourceTree = "<group>"; };
 		E893A4861E19A5A20050638A /* MockSixInternal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockSixInternal.swift; sourceTree = "<group>"; };
+		E893A48E1E19AD130050638A /* MockSix.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MockSix.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E893A49B1E19ADBB0050638A /* MockSix.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MockSix.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		E893A4761E19A4DA0050638A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E893A48A1E19AD130050638A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E893A4971E19ADBB0050638A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -43,6 +65,8 @@
 			isa = PBXGroup;
 			children = (
 				E893A47A1E19A4DA0050638A /* MockSix.framework */,
+				E893A48E1E19AD130050638A /* MockSix.framework */,
+				E893A49B1E19ADBB0050638A /* MockSix.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -69,6 +93,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E893A48B1E19AD130050638A /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E893A4A71E19AE450050638A /* MockSix.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E893A4981E19ADBB0050638A /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E893A4A81E19AE460050638A /* MockSix.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
@@ -90,6 +130,42 @@
 			productReference = E893A47A1E19A4DA0050638A /* MockSix.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		E893A48D1E19AD130050638A /* MockSix-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E893A4931E19AD130050638A /* Build configuration list for PBXNativeTarget "MockSix-iOS" */;
+			buildPhases = (
+				E893A4891E19AD130050638A /* Sources */,
+				E893A48A1E19AD130050638A /* Frameworks */,
+				E893A48B1E19AD130050638A /* Headers */,
+				E893A48C1E19AD130050638A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "MockSix-iOS";
+			productName = MockSix;
+			productReference = E893A48E1E19AD130050638A /* MockSix.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		E893A49A1E19ADBB0050638A /* MockSix-tvOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E893A4A01E19ADBB0050638A /* Build configuration list for PBXNativeTarget "MockSix-tvOS" */;
+			buildPhases = (
+				E893A4961E19ADBB0050638A /* Sources */,
+				E893A4971E19ADBB0050638A /* Frameworks */,
+				E893A4981E19ADBB0050638A /* Headers */,
+				E893A4991E19ADBB0050638A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "MockSix-tvOS";
+			productName = MockSix;
+			productReference = E893A49B1E19ADBB0050638A /* MockSix.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -102,6 +178,14 @@
 					E893A4791E19A4DA0050638A = {
 						CreatedOnToolsVersion = 8.2.1;
 						LastSwiftMigration = 0820;
+						ProvisioningStyle = Automatic;
+					};
+					E893A48D1E19AD130050638A = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
+					};
+					E893A49A1E19ADBB0050638A = {
+						CreatedOnToolsVersion = 8.2.1;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -119,12 +203,28 @@
 			projectRoot = "";
 			targets = (
 				E893A4791E19A4DA0050638A /* MockSix-macOS */,
+				E893A48D1E19AD130050638A /* MockSix-iOS */,
+				E893A49A1E19ADBB0050638A /* MockSix-tvOS */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		E893A4781E19A4DA0050638A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E893A48C1E19AD130050638A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E893A4991E19ADBB0050638A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -140,6 +240,24 @@
 			files = (
 				E893A4871E19A5A20050638A /* MockSix.swift in Sources */,
 				E893A4881E19A5A20050638A /* MockSixInternal.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E893A4891E19AD130050638A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E893A4A31E19AE350050638A /* MockSix.swift in Sources */,
+				E893A4A51E19AE390050638A /* MockSixInternal.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E893A4961E19ADBB0050638A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E893A4A41E19AE360050638A /* MockSix.swift in Sources */,
+				E893A4A61E19AE390050638A /* MockSixInternal.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,6 +374,7 @@
 				INFOPLIST_FILE = MockSix/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = me.cocoagrinder.MockSix;
 				PRODUCT_NAME = MockSix;
 				SKIP_INSTALL = YES;
@@ -278,10 +397,99 @@
 				INFOPLIST_FILE = MockSix/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = me.cocoagrinder.MockSix;
 				PRODUCT_NAME = MockSix;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		E893A4941E19AD130050638A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = MockSix/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = me.cocoagrinder.MockSix;
+				PRODUCT_NAME = MockSix;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		E893A4951E19AD130050638A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = MockSix/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = me.cocoagrinder.MockSix;
+				PRODUCT_NAME = MockSix;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		E893A4A11E19ADBB0050638A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = MockSix/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = me.cocoagrinder.MockSix;
+				PRODUCT_NAME = MockSix;
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 10.1;
+			};
+			name = Debug;
+		};
+		E893A4A21E19ADBB0050638A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = MockSix/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = me.cocoagrinder.MockSix;
+				PRODUCT_NAME = MockSix;
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 10.1;
+				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
@@ -302,6 +510,22 @@
 			buildConfigurations = (
 				E893A4831E19A4DA0050638A /* Debug */,
 				E893A4841E19A4DA0050638A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		E893A4931E19AD130050638A /* Build configuration list for PBXNativeTarget "MockSix-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E893A4941E19AD130050638A /* Debug */,
+				E893A4951E19AD130050638A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		E893A4A01E19ADBB0050638A /* Build configuration list for PBXNativeTarget "MockSix-tvOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E893A4A11E19ADBB0050638A /* Debug */,
+				E893A4A21E19ADBB0050638A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};

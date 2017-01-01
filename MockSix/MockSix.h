@@ -6,7 +6,7 @@
 //  Copyright © 2017. Tamas Lustyik. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
+#import <Foundation/Foundation.h>
 
 //! Project version number for MockSix.
 FOUNDATION_EXPORT double MockSixVersionNumber;
