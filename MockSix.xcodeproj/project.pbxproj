@@ -19,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E8055C671E19B4B2007E5EB5 /* LICENSE.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 		E893A47A1E19A4DA0050638A /* MockSix.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MockSix.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E893A47D1E19A4DA0050638A /* MockSix.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MockSix.h; sourceTree = "<group>"; };
 		E893A47E1E19A4DA0050638A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -56,6 +57,7 @@
 		E893A4701E19A4DA0050638A = {
 			isa = PBXGroup;
 			children = (
+				E8055C671E19B4B2007E5EB5 /* LICENSE.txt */,
 				E893A47C1E19A4DA0050638A /* MockSix */,
 				E893A47B1E19A4DA0050638A /* Products */,
 			);
@@ -512,6 +514,7 @@
 				E893A4841E19A4DA0050638A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E893A4931E19AD130050638A /* Build configuration list for PBXNativeTarget "MockSix-iOS" */ = {
 			isa = XCConfigurationList;
@@ -520,6 +523,7 @@
 				E893A4951E19AD130050638A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E893A4A01E19ADBB0050638A /* Build configuration list for PBXNativeTarget "MockSix-tvOS" */ = {
 			isa = XCConfigurationList;
@@ -528,6 +532,7 @@
 				E893A4A21E19ADBB0050638A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
