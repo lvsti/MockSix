@@ -102,10 +102,10 @@ extension Mock where MockMethod.RawValue == Int {
         })
     }
 
-    public func registerInvocation<T>(for method: MockMethod,
-                                      function: String = #function,
-                                      args: Any?...,
-                                      returns: ([Any?]) -> T? = { _ in nil }) -> T? {
+    private func registerInvocation<T>(for method: MockMethod,
+                                       function: String = #function,
+                                       args: [Any?],
+                                       returns: ([Any?]) -> T? = { _ in nil }) -> T? {
         logInvocation(method: method, functionName: function, arguments: args)
         
         let id = identifier(for: method)
@@ -122,10 +122,10 @@ extension Mock where MockMethod.RawValue == Int {
         }
     }
     
-    public func registerInvocation<T>(for method: MockMethod,
-                                      function: String = #function,
-                                      args: Any?...,
-                                      returns: ([Any?]) -> T) -> T {
+    private func registerInvocation<T>(for method: MockMethod,
+                                       function: String = #function,
+                                       args: [Any?],
+                                       returns: ([Any?]) -> T) -> T {
         logInvocation(method: method, functionName: function, arguments: args)
         
         let id = identifier(for: method)
@@ -140,6 +140,20 @@ extension Mock where MockMethod.RawValue == Int {
         else {
             return returns(args)
         }
+    }
+
+    public func registerInvocation<T>(for method: MockMethod,
+                                      function: String = #function,
+                                      args: Any?...,
+                                      returns: ([Any?]) -> T? = { _ in nil }) -> T? {
+        return registerInvocation(for: method, function: function, args: args, returns: returns)
+    }
+
+    public func registerInvocation<T>(for method: MockMethod,
+                                   function: String = #function,
+                                   args: Any?...,
+                                   returns: ([Any?]) -> T) -> T {
+        return registerInvocation(for: method, function: function, args: args, returns: returns)
     }
 
     public func registerInvocation<T>(for method: MockMethod,
