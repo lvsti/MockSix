@@ -16,7 +16,85 @@
 		E893A4A61E19AE390050638A /* MockSixInternal.swift in Sources */ = {isa = PBXBuildFile; fileRef = E893A4861E19A5A20050638A /* MockSixInternal.swift */; };
 		E893A4A71E19AE450050638A /* MockSix.h in Headers */ = {isa = PBXBuildFile; fileRef = E893A47D1E19A4DA0050638A /* MockSix.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E893A4A81E19AE460050638A /* MockSix.h in Headers */ = {isa = PBXBuildFile; fileRef = E893A47D1E19A4DA0050638A /* MockSix.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E8B2BE1F1E1C4FAD0054760A /* MockSixTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B2BE1E1E1C4FAD0054760A /* MockSixTests.swift */; };
+		E8B2BE211E1C4FAD0054760A /* MockSix.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E893A47A1E19A4DA0050638A /* MockSix.framework */; };
+		E8B2BE301E1C50870054760A /* MockSix.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E893A48E1E19AD130050638A /* MockSix.framework */; };
+		E8B2BE3F1E1C509A0054760A /* MockSix.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E893A49B1E19ADBB0050638A /* MockSix.framework */; };
+		E8B2BE451E1C50C90054760A /* MockSixTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B2BE1E1E1C4FAD0054760A /* MockSixTests.swift */; };
+		E8B2BE461E1C50CA0054760A /* MockSixTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B2BE1E1E1C4FAD0054760A /* MockSixTests.swift */; };
+		E8B2BE551E1C51B60054760A /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8B2BE511E1C51A20054760A /* Quick.framework */; };
+		E8B2BE561E1C51B60054760A /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8B2BE521E1C51A20054760A /* Nimble.framework */; };
+		E8B2BE571E1C51BB0054760A /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8B2BE4B1E1C51820054760A /* Quick.framework */; };
+		E8B2BE581E1C51BB0054760A /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8B2BE4C1E1C51820054760A /* Nimble.framework */; };
+		E8B2BE591E1C51C10054760A /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8B2BE471E1C516D0054760A /* Quick.framework */; };
+		E8B2BE5A1E1C51C10054760A /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8B2BE481E1C516D0054760A /* Nimble.framework */; };
+		E8B2BE5C1E1C56A50054760A /* Quick.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = E8B2BE471E1C516D0054760A /* Quick.framework */; };
+		E8B2BE5D1E1C56A50054760A /* Nimble.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = E8B2BE481E1C516D0054760A /* Nimble.framework */; };
+		E8B2BE5F1E1C56C40054760A /* Quick.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = E8B2BE4B1E1C51820054760A /* Quick.framework */; };
+		E8B2BE601E1C56C40054760A /* Nimble.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = E8B2BE4C1E1C51820054760A /* Nimble.framework */; };
+		E8B2BE621E1C56D30054760A /* Quick.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = E8B2BE511E1C51A20054760A /* Quick.framework */; };
+		E8B2BE631E1C56D30054760A /* Nimble.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = E8B2BE521E1C51A20054760A /* Nimble.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		E8B2BE221E1C4FAD0054760A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E893A4711E19A4DA0050638A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E893A4791E19A4DA0050638A;
+			remoteInfo = "MockSix-macOS";
+		};
+		E8B2BE311E1C50870054760A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E893A4711E19A4DA0050638A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E893A48D1E19AD130050638A;
+			remoteInfo = "MockSix-iOS";
+		};
+		E8B2BE401E1C509A0054760A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E893A4711E19A4DA0050638A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E893A49A1E19ADBB0050638A;
+			remoteInfo = "MockSix-tvOS";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		E8B2BE5B1E1C56960054760A /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 16;
+			files = (
+				E8B2BE5C1E1C56A50054760A /* Quick.framework in CopyFiles */,
+				E8B2BE5D1E1C56A50054760A /* Nimble.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E8B2BE5E1E1C56B90054760A /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 16;
+			files = (
+				E8B2BE5F1E1C56C40054760A /* Quick.framework in CopyFiles */,
+				E8B2BE601E1C56C40054760A /* Nimble.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E8B2BE611E1C56CB0054760A /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 16;
+			files = (
+				E8B2BE621E1C56D30054760A /* Quick.framework in CopyFiles */,
+				E8B2BE631E1C56D30054760A /* Nimble.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		E8055C671E19B4B2007E5EB5 /* LICENSE.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
@@ -27,6 +105,17 @@
 		E893A4861E19A5A20050638A /* MockSixInternal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockSixInternal.swift; sourceTree = "<group>"; };
 		E893A48E1E19AD130050638A /* MockSix.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MockSix.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E893A49B1E19ADBB0050638A /* MockSix.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MockSix.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E8B2BE1C1E1C4FAC0054760A /* MockSixTests-macOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MockSixTests-macOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E8B2BE1E1E1C4FAD0054760A /* MockSixTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSixTests.swift; sourceTree = "<group>"; };
+		E8B2BE201E1C4FAD0054760A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E8B2BE2B1E1C50870054760A /* MockSixTests-iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MockSixTests-iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E8B2BE3A1E1C509A0054760A /* MockSixTests-tvOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MockSixTests-tvOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E8B2BE471E1C516D0054760A /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/Mac/Quick.framework; sourceTree = "<group>"; };
+		E8B2BE481E1C516D0054760A /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/Mac/Nimble.framework; sourceTree = "<group>"; };
+		E8B2BE4B1E1C51820054760A /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
+		E8B2BE4C1E1C51820054760A /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
+		E8B2BE511E1C51A20054760A /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/tvOS/Quick.framework; sourceTree = "<group>"; };
+		E8B2BE521E1C51A20054760A /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/tvOS/Nimble.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,14 +140,51 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E8B2BE191E1C4FAC0054760A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E8B2BE5A1E1C51C10054760A /* Nimble.framework in Frameworks */,
+				E8B2BE591E1C51C10054760A /* Quick.framework in Frameworks */,
+				E8B2BE211E1C4FAD0054760A /* MockSix.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E8B2BE281E1C50870054760A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E8B2BE581E1C51BB0054760A /* Nimble.framework in Frameworks */,
+				E8B2BE571E1C51BB0054760A /* Quick.framework in Frameworks */,
+				E8B2BE301E1C50870054760A /* MockSix.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E8B2BE371E1C509A0054760A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E8B2BE561E1C51B60054760A /* Nimble.framework in Frameworks */,
+				E8B2BE551E1C51B60054760A /* Quick.framework in Frameworks */,
+				E8B2BE3F1E1C509A0054760A /* MockSix.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		E893A4701E19A4DA0050638A = {
 			isa = PBXGroup;
 			children = (
+				E8B2BE511E1C51A20054760A /* Quick.framework */,
+				E8B2BE521E1C51A20054760A /* Nimble.framework */,
+				E8B2BE4B1E1C51820054760A /* Quick.framework */,
+				E8B2BE4C1E1C51820054760A /* Nimble.framework */,
+				E8B2BE471E1C516D0054760A /* Quick.framework */,
+				E8B2BE481E1C516D0054760A /* Nimble.framework */,
 				E8055C671E19B4B2007E5EB5 /* LICENSE.txt */,
 				E893A47C1E19A4DA0050638A /* MockSix */,
+				E8B2BE1D1E1C4FAD0054760A /* MockSixTests */,
 				E893A47B1E19A4DA0050638A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -69,6 +195,9 @@
 				E893A47A1E19A4DA0050638A /* MockSix.framework */,
 				E893A48E1E19AD130050638A /* MockSix.framework */,
 				E893A49B1E19ADBB0050638A /* MockSix.framework */,
+				E8B2BE1C1E1C4FAC0054760A /* MockSixTests-macOS.xctest */,
+				E8B2BE2B1E1C50870054760A /* MockSixTests-iOS.xctest */,
+				E8B2BE3A1E1C509A0054760A /* MockSixTests-tvOS.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -82,6 +211,15 @@
 				E893A47E1E19A4DA0050638A /* Info.plist */,
 			);
 			path = MockSix;
+			sourceTree = "<group>";
+		};
+		E8B2BE1D1E1C4FAD0054760A /* MockSixTests */ = {
+			isa = PBXGroup;
+			children = (
+				E8B2BE1E1E1C4FAD0054760A /* MockSixTests.swift */,
+				E8B2BE201E1C4FAD0054760A /* Info.plist */,
+			);
+			path = MockSixTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -168,12 +306,70 @@
 			productReference = E893A49B1E19ADBB0050638A /* MockSix.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		E8B2BE1B1E1C4FAC0054760A /* MockSixTests-macOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E8B2BE261E1C4FAD0054760A /* Build configuration list for PBXNativeTarget "MockSixTests-macOS" */;
+			buildPhases = (
+				E8B2BE181E1C4FAC0054760A /* Sources */,
+				E8B2BE191E1C4FAC0054760A /* Frameworks */,
+				E8B2BE1A1E1C4FAC0054760A /* Resources */,
+				E8B2BE5B1E1C56960054760A /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E8B2BE231E1C4FAD0054760A /* PBXTargetDependency */,
+			);
+			name = "MockSixTests-macOS";
+			productName = MockSixTests;
+			productReference = E8B2BE1C1E1C4FAC0054760A /* MockSixTests-macOS.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		E8B2BE2A1E1C50870054760A /* MockSixTests-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E8B2BE331E1C50870054760A /* Build configuration list for PBXNativeTarget "MockSixTests-iOS" */;
+			buildPhases = (
+				E8B2BE271E1C50870054760A /* Sources */,
+				E8B2BE281E1C50870054760A /* Frameworks */,
+				E8B2BE291E1C50870054760A /* Resources */,
+				E8B2BE5E1E1C56B90054760A /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E8B2BE321E1C50870054760A /* PBXTargetDependency */,
+			);
+			name = "MockSixTests-iOS";
+			productName = "MockSixTests-iOS";
+			productReference = E8B2BE2B1E1C50870054760A /* MockSixTests-iOS.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		E8B2BE391E1C509A0054760A /* MockSixTests-tvOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E8B2BE421E1C509A0054760A /* Build configuration list for PBXNativeTarget "MockSixTests-tvOS" */;
+			buildPhases = (
+				E8B2BE361E1C509A0054760A /* Sources */,
+				E8B2BE371E1C509A0054760A /* Frameworks */,
+				E8B2BE381E1C509A0054760A /* Resources */,
+				E8B2BE611E1C56CB0054760A /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E8B2BE411E1C509A0054760A /* PBXTargetDependency */,
+			);
+			name = "MockSixTests-tvOS";
+			productName = "MockSixTests-tvOS";
+			productReference = E8B2BE3A1E1C509A0054760A /* MockSixTests-tvOS.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		E893A4711E19A4DA0050638A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0820;
 				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Tamas Lustyik";
 				TargetAttributes = {
@@ -187,6 +383,18 @@
 						ProvisioningStyle = Automatic;
 					};
 					E893A49A1E19ADBB0050638A = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
+					};
+					E8B2BE1B1E1C4FAC0054760A = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
+					};
+					E8B2BE2A1E1C50870054760A = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
+					};
+					E8B2BE391E1C509A0054760A = {
 						CreatedOnToolsVersion = 8.2.1;
 						ProvisioningStyle = Automatic;
 					};
@@ -207,6 +415,9 @@
 				E893A4791E19A4DA0050638A /* MockSix-macOS */,
 				E893A48D1E19AD130050638A /* MockSix-iOS */,
 				E893A49A1E19ADBB0050638A /* MockSix-tvOS */,
+				E8B2BE1B1E1C4FAC0054760A /* MockSixTests-macOS */,
+				E8B2BE2A1E1C50870054760A /* MockSixTests-iOS */,
+				E8B2BE391E1C509A0054760A /* MockSixTests-tvOS */,
 			);
 		};
 /* End PBXProject section */
@@ -227,6 +438,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		E893A4991E19ADBB0050638A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E8B2BE1A1E1C4FAC0054760A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E8B2BE291E1C50870054760A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E8B2BE381E1C509A0054760A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -263,7 +495,49 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E8B2BE181E1C4FAC0054760A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E8B2BE1F1E1C4FAD0054760A /* MockSixTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E8B2BE271E1C50870054760A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E8B2BE451E1C50C90054760A /* MockSixTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E8B2BE361E1C509A0054760A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E8B2BE461E1C50CA0054760A /* MockSixTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		E8B2BE231E1C4FAD0054760A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E893A4791E19A4DA0050638A /* MockSix-macOS */;
+			targetProxy = E8B2BE221E1C4FAD0054760A /* PBXContainerItemProxy */;
+		};
+		E8B2BE321E1C50870054760A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E893A48D1E19AD130050638A /* MockSix-iOS */;
+			targetProxy = E8B2BE311E1C50870054760A /* PBXContainerItemProxy */;
+		};
+		E8B2BE411E1C509A0054760A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E893A49A1E19ADBB0050638A /* MockSix-tvOS */;
+			targetProxy = E8B2BE401E1C509A0054760A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		E893A4801E19A4DA0050638A /* Debug */ = {
@@ -372,6 +646,11 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				FRAMEWORK_VERSION = A;
 				INFOPLIST_FILE = MockSix/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -395,6 +674,11 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				FRAMEWORK_VERSION = A;
 				INFOPLIST_FILE = MockSix/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -416,6 +700,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = MockSix/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
@@ -438,6 +726,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = MockSix/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
@@ -460,6 +752,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/tvOS",
+				);
 				INFOPLIST_FILE = MockSix/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -481,6 +777,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/tvOS",
+				);
 				INFOPLIST_FILE = MockSix/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -491,6 +791,110 @@
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.2;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		E8B2BE241E1C4FAD0054760A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
+				INFOPLIST_FILE = MockSixTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = me.cocoagrinder.MockSixTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		E8B2BE251E1C4FAD0054760A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
+				INFOPLIST_FILE = MockSixTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = me.cocoagrinder.MockSixTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		E8B2BE341E1C50870054760A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = MockSixTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "me.cocoagrinder.MockSixTests-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		E8B2BE351E1C50870054760A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = MockSixTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "me.cocoagrinder.MockSixTests-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 3.0;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		E8B2BE431E1C509A0054760A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/tvOS",
+				);
+				INFOPLIST_FILE = MockSixTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "me.cocoagrinder.MockSixTests-tvOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SWIFT_VERSION = 3.0;
+				TVOS_DEPLOYMENT_TARGET = 10.1;
+			};
+			name = Debug;
+		};
+		E8B2BE441E1C509A0054760A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/tvOS",
+				);
+				INFOPLIST_FILE = MockSixTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "me.cocoagrinder.MockSixTests-tvOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SWIFT_VERSION = 3.0;
+				TVOS_DEPLOYMENT_TARGET = 10.1;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -533,6 +937,30 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		E8B2BE261E1C4FAD0054760A /* Build configuration list for PBXNativeTarget "MockSixTests-macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E8B2BE241E1C4FAD0054760A /* Debug */,
+				E8B2BE251E1C4FAD0054760A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		E8B2BE331E1C50870054760A /* Build configuration list for PBXNativeTarget "MockSixTests-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E8B2BE341E1C50870054760A /* Debug */,
+				E8B2BE351E1C50870054760A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		E8B2BE421E1C509A0054760A /* Build configuration list for PBXNativeTarget "MockSixTests-tvOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E8B2BE431E1C509A0054760A /* Debug */,
+				E8B2BE441E1C509A0054760A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
