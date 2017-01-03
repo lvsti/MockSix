@@ -4,7 +4,7 @@ before_install:
 - gem install cocoapods
 script:
 - set -o pipefail
-- xcodebuild clean build test -project MockSix/MockSix.xcodeproj -scheme MockSix-macOS | xcpretty
-- xcodebuild clean build test -project MockSix/MockSix.xcodeproj -scheme MockSix-iOS | xcpretty
-- xcodebuild clean build test -project MockSix/MockSix.xcodeproj -scheme MockSix-tvOS | xcpretty
+- xcodebuild clean build test -project MockSix.xcodeproj -scheme MockSix-macOS | xcpretty
+- xcodebuild clean build test -project MockSix.xcodeproj -scheme MockSix-iOS | xcpretty
+- xcodebuild clean build test -project MockSix.xcodeproj -scheme MockSix-tvOS | xcpretty
 - pod lib lint
