@@ -19,7 +19,7 @@
 //
 
 extension Mock where Self : AnyObject {
-    var mockSixLock: String {
+    public var mockSixLock: String {
         let ptr = Unmanaged.passUnretained(self).toOpaque()
         let address = unsafeBitCast(ptr, to: Int.self)
         return String(format: "%016lx", address)
