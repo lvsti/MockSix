@@ -7,6 +7,6 @@ before_install:
 script:
 - set -o pipefail
 - xcodebuild clean build test -project MockSix.xcodeproj -scheme MockSix-macOS | xcpretty
-- xcodebuild clean build test -project MockSix.xcodeproj -scheme MockSix-iOS -destination 'platform=iOS Simulator,name=iPhone 7,OS=10.2' | xcpretty
-- xcodebuild clean build test -project MockSix.xcodeproj -scheme MockSix-tvOS -destination 'platform=tvOS Simulator,name=Apple TV 1080p,OS=10.1' | xcpretty
+- xcodebuild clean build test -project MockSix.xcodeproj -scheme MockSix-iOS -destination 'id=E40727B3-41FB-4D6E-B4CB-BFA87109EB12' | xcpretty
+- xcodebuild clean build test -project MockSix.xcodeproj -scheme MockSix-tvOS -destination 'id=7337738A-F121-47D8-9304-23DCE061A615' | xcpretty
 - pod lib lint
