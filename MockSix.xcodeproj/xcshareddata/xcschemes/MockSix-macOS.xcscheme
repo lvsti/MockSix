@@ -28,7 +28,26 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "E8B2BE1B1E1C4FAC0054760A"
+               BuildableName = "MockSixTests-macOS.xctest"
+               BlueprintName = "MockSixTests-macOS"
+               ReferencedContainer = "container:MockSix.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "E893A4791E19A4DA0050638A"
+            BuildableName = "MockSix.framework"
+            BlueprintName = "MockSix-macOS"
+            ReferencedContainer = "container:MockSix.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
