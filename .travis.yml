@@ -8,5 +8,5 @@ script:
 - set -o pipefail
 - xcodebuild clean build test -project MockSix.xcodeproj -scheme MockSix-macOS | xcpretty
 - xcodebuild clean build test -project MockSix.xcodeproj -scheme MockSix-iOS -destination 'id=E40727B3-41FB-4D6E-B4CB-BFA87109EB12' | xcpretty
-- xcodebuild clean build test -project MockSix.xcodeproj -scheme MockSix-tvOS -destination 'id=7337738A-F121-47D8-9304-23DCE061A615' | xcpretty
+- xcodebuild clean build test -project MockSix.xcodeproj -scheme MockSix-tvOS -destination 'id=5761D8AB-2838-4681-A528-D0949FF240C5' | xcpretty
 - pod lib lint
