@@ -2,6 +2,8 @@ osx_image: xcode8.2
 language: objective-c
 before_install:
 - gem install cocoapods
+- brew install carthage
+- carthage bootstrap
 script:
 - set -o pipefail
 - xcodebuild clean build test -project MockSix.xcodeproj -scheme MockSix-macOS | xcpretty
