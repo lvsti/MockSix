@@ -8,7 +8,7 @@ MockSix simplifies manual object mocking in Swift by taking over some of the boi
 and offering an API that is hard to use incorrectly.
 DESC
   s.homepage = 'https://github.com/lvsti/MockSix'
-  s.social_media_url = 'http://lvsti.github.io/cocoagrinder/'
+  s.social_media_url = 'https://twitter.com/cocoagrinder/'
   s.authors = { 'Tamas Lustyik' => 'elveestei@gmail.com' }
   s.source = { :git => 'https://github.com/lvsti/MockSix.git', :tag => "v#{s.version}" }
 
