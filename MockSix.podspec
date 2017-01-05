@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   s.name = 'MockSix'
   s.version = '0.1.1'
-  s.license = 'Apache License, Version 2.0'
+  s.license = 'MIT'
   s.summary = 'An object mocking microframework for Swift'
   s.description = <<-DESC
 MockSix simplifies manual object mocking in Swift by taking over some of the boilerplate

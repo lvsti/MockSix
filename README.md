@@ -6,7 +6,7 @@
 ![Swift 3.0.x](https://img.shields.io/badge/Swift-3.0.x-orange.svg)
 ![platforms](https://img.shields.io/badge/platforms-iOS%20%7C%20OS%20X%20%7C%20tvOS%20-lightgrey.svg)
 
-MockSix is a microframework to make object mocking in Swift somewhat easier. MockSix is built upon [MockFive](https://github.com/DeliciousRaspberryPi/MockFive).
+MockSix is a microframework to make object mocking in Swift somewhat easier. MockSix is built upon Daniel Burbank's [MockFive](https://github.com/DeliciousRaspberryPi/MockFive).
 
 If you are using Quick+Nimble, make sure you check out the Nimble matcher extensions at [NimbleMockSix](https://github.com/lvsti/NimbleMockSix) as well.
 
@@ -82,4 +82,4 @@ TODO
 
 ### License
 
-MockSix is released under the Apache 2.0 license.
+MockSix is released under the MIT license.
