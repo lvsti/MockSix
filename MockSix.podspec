@@ -10,7 +10,7 @@ DESC
   s.homepage = 'https://github.com/lvsti/MockSix'
   s.social_media_url = 'http://lvsti.github.io/cocoagrinder/'
   s.authors = { 'Tamas Lustyik' => 'elveestei@gmail.com' }
-  s.source = { :git => 'https://github.com/lvsti/MockSix.git', :tag => s.version.to_s }
+  s.source = { :git => 'https://github.com/lvsti/MockSix.git', :tag => "v#{s.version}" }
 
   s.ios.deployment_target = '8.4'
   s.osx.deployment_target = '10.10'
