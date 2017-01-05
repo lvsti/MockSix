@@ -1,6 +1,6 @@
 # MockSix 
 
-[![](https://travis-ci.org/lvsti/MockSix.svg?branch=master)](https://travis-ci.org/lvsti/MockSix/builds/188693467)
+[![](https://api.travis-ci.org/lvsti/MockSix.svg?branch=master)](https://travis-ci.org/lvsti/MockSix)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![CocoaPods compatible](https://img.shields.io/cocoapods/v/MockSix.svg)](https://cocoapods.org/pods/MockSix)
 ![Swift 3.0.x](https://img.shields.io/badge/Swift-3.0.x-orange.svg)
