@@ -1,10 +1,11 @@
 # MockSix 
 
 [![](https://api.travis-ci.org/lvsti/MockSix.svg?branch=master)](https://travis-ci.org/lvsti/MockSix)
-[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-brightgreen.svg)](https://github.com/Carthage/Carthage)
+[![Swift Package Manager compatible](https://img.shields.io/badge/Swift%20Package%20Manager-compatible-brightgreen.svg)](https://swift.org/package-manager/)
 [![CocoaPods compatible](https://img.shields.io/cocoapods/v/MockSix.svg)](https://cocoapods.org/pods/MockSix)
 ![Swift 3.0.x](https://img.shields.io/badge/Swift-3.0.x-orange.svg)
-![platforms](https://img.shields.io/badge/platforms-iOS%20%7C%20OS%20X%20%7C%20tvOS%20-lightgrey.svg)
+![platforms](https://img.shields.io/badge/platforms-iOS%20%7C%20OS%20X%20%7C%20tvOS%20%7C%20Linux-lightgrey.svg)
 
 MockSix is a microframework to make object mocking in Swift somewhat easier. MockSix is built upon Daniel Burbank's [MockFive](https://github.com/DeliciousRaspberryPi/MockFive).
 
@@ -68,10 +69,22 @@ Via Cocoapods: add the following line to your Podfile:
 pod 'MockSix'
 ```
 
-Via Carthage: add the following line to your Cartfile:
+Via Carthage: add the following line to your Cartfile (or Cartfile.private):
 
 ```
 github "lvsti/MockSix"
+```
+
+Via the Swift Package Manager: add it to the dependencies in your Package.swift:
+
+```swift
+let package = Package(
+    name: "MyAwesomeApp",
+    dependencies: [
+        .Package(url: "https://github.com/lvsti/MockSix", majorVersion: 0),
+        // ... other dependencies ...
+    ]
+)
 ```
 
 Or just add `MockSix.swift` and `MockSixInternal.swift` to your test target.
