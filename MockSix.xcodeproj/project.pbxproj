@@ -98,12 +98,15 @@
 
 /* Begin PBXFileReference section */
 		E8055C671E19B4B2007E5EB5 /* LICENSE.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
+		E83F22151E212F3C002383ED /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		E83F22171E213125002383ED /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E83F22181E213125002383ED /* MockSix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MockSix.h; sourceTree = "<group>"; };
 		E83F22191E213125002383ED /* MockSix.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockSix.swift; sourceTree = "<group>"; };
 		E83F221A1E213125002383ED /* MockSixInternal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockSixInternal.swift; sourceTree = "<group>"; };
+		E83F22271E21316E002383ED /* LinuxMain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinuxMain.swift; sourceTree = "<group>"; };
 		E83F22291E21316E002383ED /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E83F222A1E21316E002383ED /* MockSixTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockSixTests.swift; sourceTree = "<group>"; };
+		E83F22341E213D06002383ED /* Package.test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Package.test.swift; path = Support/Package.test.swift; sourceTree = "<group>"; };
 		E893A47A1E19A4DA0050638A /* MockSix.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MockSix.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E893A48E1E19AD130050638A /* MockSix.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MockSix.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E893A49B1E19ADBB0050638A /* MockSix.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MockSix.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -203,6 +206,8 @@
 				E8B2BE471E1C516D0054760A /* Quick.framework */,
 				E8B2BE481E1C516D0054760A /* Nimble.framework */,
 				E8055C671E19B4B2007E5EB5 /* LICENSE.txt */,
+				E83F22151E212F3C002383ED /* Package.swift */,
+				E83F22341E213D06002383ED /* Package.test.swift */,
 				E893A47C1E19A4DA0050638A /* Sources */,
 				E8B2BE1D1E1C4FAD0054760A /* Tests */,
 				E893A47B1E19A4DA0050638A /* Products */,
@@ -233,6 +238,7 @@
 		E8B2BE1D1E1C4FAD0054760A /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				E83F22271E21316E002383ED /* LinuxMain.swift */,
 				E83F22281E21316E002383ED /* MockSixTests */,
 			);
 			path = Tests;
