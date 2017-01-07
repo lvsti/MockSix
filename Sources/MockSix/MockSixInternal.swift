@@ -26,11 +26,14 @@
 //  SOFTWARE.
 //
 
+import Dispatch
+
+
 extension Mock where Self : AnyObject {
     public var mockSixLock: String {
         let ptr = Unmanaged.passUnretained(self).toOpaque()
         let address = unsafeBitCast(ptr, to: Int.self)
-        return String(format: "%016lx", address)
+        return "\(address)"
     }
 }
 
@@ -220,8 +223,12 @@ public func resetMockSix() {
 }
 
 
-public func lock(signature: String = #file + ":\(#line):\(OSAtomicIncrement32(&globalObjectIDIndex))") -> String {
-    return signature
+public func lock(prefix: String = #file + ":\(#line):") -> String {
+    let suffix = mockQueue.sync { _ -> String in
+        globalObjectIDIndex += 1
+        return "\(globalObjectIDIndex)"
+    }
+    return prefix + suffix
 }
 
 
