@@ -7,21 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E893A47F1E19A4DA0050638A /* MockSix.h in Headers */ = {isa = PBXBuildFile; fileRef = E893A47D1E19A4DA0050638A /* MockSix.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E893A4871E19A5A20050638A /* MockSix.swift in Sources */ = {isa = PBXBuildFile; fileRef = E893A4851E19A5A20050638A /* MockSix.swift */; };
-		E893A4881E19A5A20050638A /* MockSixInternal.swift in Sources */ = {isa = PBXBuildFile; fileRef = E893A4861E19A5A20050638A /* MockSixInternal.swift */; };
-		E893A4A31E19AE350050638A /* MockSix.swift in Sources */ = {isa = PBXBuildFile; fileRef = E893A4851E19A5A20050638A /* MockSix.swift */; };
-		E893A4A41E19AE360050638A /* MockSix.swift in Sources */ = {isa = PBXBuildFile; fileRef = E893A4851E19A5A20050638A /* MockSix.swift */; };
-		E893A4A51E19AE390050638A /* MockSixInternal.swift in Sources */ = {isa = PBXBuildFile; fileRef = E893A4861E19A5A20050638A /* MockSixInternal.swift */; };
-		E893A4A61E19AE390050638A /* MockSixInternal.swift in Sources */ = {isa = PBXBuildFile; fileRef = E893A4861E19A5A20050638A /* MockSixInternal.swift */; };
-		E893A4A71E19AE450050638A /* MockSix.h in Headers */ = {isa = PBXBuildFile; fileRef = E893A47D1E19A4DA0050638A /* MockSix.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E893A4A81E19AE460050638A /* MockSix.h in Headers */ = {isa = PBXBuildFile; fileRef = E893A47D1E19A4DA0050638A /* MockSix.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E8B2BE1F1E1C4FAD0054760A /* MockSixTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B2BE1E1E1C4FAD0054760A /* MockSixTests.swift */; };
+		E83F221E1E213125002383ED /* MockSix.h in Headers */ = {isa = PBXBuildFile; fileRef = E83F22181E213125002383ED /* MockSix.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E83F221F1E213125002383ED /* MockSix.h in Headers */ = {isa = PBXBuildFile; fileRef = E83F22181E213125002383ED /* MockSix.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E83F22201E213125002383ED /* MockSix.h in Headers */ = {isa = PBXBuildFile; fileRef = E83F22181E213125002383ED /* MockSix.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E83F22211E213125002383ED /* MockSix.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83F22191E213125002383ED /* MockSix.swift */; };
+		E83F22221E213125002383ED /* MockSix.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83F22191E213125002383ED /* MockSix.swift */; };
+		E83F22231E213125002383ED /* MockSix.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83F22191E213125002383ED /* MockSix.swift */; };
+		E83F22241E213125002383ED /* MockSixInternal.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83F221A1E213125002383ED /* MockSixInternal.swift */; };
+		E83F22251E213125002383ED /* MockSixInternal.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83F221A1E213125002383ED /* MockSixInternal.swift */; };
+		E83F22261E213125002383ED /* MockSixInternal.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83F221A1E213125002383ED /* MockSixInternal.swift */; };
+		E83F22311E21316E002383ED /* MockSixTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83F222A1E21316E002383ED /* MockSixTests.swift */; };
+		E83F22321E21316E002383ED /* MockSixTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83F222A1E21316E002383ED /* MockSixTests.swift */; };
+		E83F22331E21316E002383ED /* MockSixTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83F222A1E21316E002383ED /* MockSixTests.swift */; };
 		E8B2BE211E1C4FAD0054760A /* MockSix.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E893A47A1E19A4DA0050638A /* MockSix.framework */; };
 		E8B2BE301E1C50870054760A /* MockSix.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E893A48E1E19AD130050638A /* MockSix.framework */; };
 		E8B2BE3F1E1C509A0054760A /* MockSix.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E893A49B1E19ADBB0050638A /* MockSix.framework */; };
-		E8B2BE451E1C50C90054760A /* MockSixTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B2BE1E1E1C4FAD0054760A /* MockSixTests.swift */; };
-		E8B2BE461E1C50CA0054760A /* MockSixTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B2BE1E1E1C4FAD0054760A /* MockSixTests.swift */; };
 		E8B2BE551E1C51B60054760A /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8B2BE511E1C51A20054760A /* Quick.framework */; };
 		E8B2BE561E1C51B60054760A /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8B2BE521E1C51A20054760A /* Nimble.framework */; };
 		E8B2BE571E1C51BB0054760A /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8B2BE4B1E1C51820054760A /* Quick.framework */; };
@@ -98,16 +98,16 @@
 
 /* Begin PBXFileReference section */
 		E8055C671E19B4B2007E5EB5 /* LICENSE.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
+		E83F22171E213125002383ED /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E83F22181E213125002383ED /* MockSix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MockSix.h; sourceTree = "<group>"; };
+		E83F22191E213125002383ED /* MockSix.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockSix.swift; sourceTree = "<group>"; };
+		E83F221A1E213125002383ED /* MockSixInternal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockSixInternal.swift; sourceTree = "<group>"; };
+		E83F22291E21316E002383ED /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E83F222A1E21316E002383ED /* MockSixTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockSixTests.swift; sourceTree = "<group>"; };
 		E893A47A1E19A4DA0050638A /* MockSix.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MockSix.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E893A47D1E19A4DA0050638A /* MockSix.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MockSix.h; sourceTree = "<group>"; };
-		E893A47E1E19A4DA0050638A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E893A4851E19A5A20050638A /* MockSix.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockSix.swift; sourceTree = "<group>"; };
-		E893A4861E19A5A20050638A /* MockSixInternal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockSixInternal.swift; sourceTree = "<group>"; };
 		E893A48E1E19AD130050638A /* MockSix.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MockSix.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E893A49B1E19ADBB0050638A /* MockSix.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MockSix.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8B2BE1C1E1C4FAC0054760A /* MockSixTests-macOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MockSixTests-macOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		E8B2BE1E1E1C4FAD0054760A /* MockSixTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSixTests.swift; sourceTree = "<group>"; };
-		E8B2BE201E1C4FAD0054760A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E8B2BE2B1E1C50870054760A /* MockSixTests-iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MockSixTests-iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8B2BE3A1E1C509A0054760A /* MockSixTests-tvOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MockSixTests-tvOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8B2BE471E1C516D0054760A /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/Mac/Quick.framework; sourceTree = "<group>"; };
@@ -173,6 +173,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E83F22161E213125002383ED /* MockSix */ = {
+			isa = PBXGroup;
+			children = (
+				E83F22171E213125002383ED /* Info.plist */,
+				E83F22181E213125002383ED /* MockSix.h */,
+				E83F22191E213125002383ED /* MockSix.swift */,
+				E83F221A1E213125002383ED /* MockSixInternal.swift */,
+			);
+			path = MockSix;
+			sourceTree = "<group>";
+		};
+		E83F22281E21316E002383ED /* MockSixTests */ = {
+			isa = PBXGroup;
+			children = (
+				E83F22291E21316E002383ED /* Info.plist */,
+				E83F222A1E21316E002383ED /* MockSixTests.swift */,
+			);
+			path = MockSixTests;
+			sourceTree = "<group>";
+		};
 		E893A4701E19A4DA0050638A = {
 			isa = PBXGroup;
 			children = (
@@ -183,8 +203,8 @@
 				E8B2BE471E1C516D0054760A /* Quick.framework */,
 				E8B2BE481E1C516D0054760A /* Nimble.framework */,
 				E8055C671E19B4B2007E5EB5 /* LICENSE.txt */,
-				E893A47C1E19A4DA0050638A /* MockSix */,
-				E8B2BE1D1E1C4FAD0054760A /* MockSixTests */,
+				E893A47C1E19A4DA0050638A /* Sources */,
+				E8B2BE1D1E1C4FAD0054760A /* Tests */,
 				E893A47B1E19A4DA0050638A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -202,24 +222,20 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		E893A47C1E19A4DA0050638A /* MockSix */ = {
+		E893A47C1E19A4DA0050638A /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				E893A47D1E19A4DA0050638A /* MockSix.h */,
-				E893A4851E19A5A20050638A /* MockSix.swift */,
-				E893A4861E19A5A20050638A /* MockSixInternal.swift */,
-				E893A47E1E19A4DA0050638A /* Info.plist */,
+				E83F22161E213125002383ED /* MockSix */,
 			);
-			path = MockSix;
+			path = Sources;
 			sourceTree = "<group>";
 		};
-		E8B2BE1D1E1C4FAD0054760A /* MockSixTests */ = {
+		E8B2BE1D1E1C4FAD0054760A /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				E8B2BE1E1E1C4FAD0054760A /* MockSixTests.swift */,
-				E8B2BE201E1C4FAD0054760A /* Info.plist */,
+				E83F22281E21316E002383ED /* MockSixTests */,
 			);
-			path = MockSixTests;
+			path = Tests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -229,7 +245,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E893A47F1E19A4DA0050638A /* MockSix.h in Headers */,
+				E83F221E1E213125002383ED /* MockSix.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -237,7 +253,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E893A4A71E19AE450050638A /* MockSix.h in Headers */,
+				E83F221F1E213125002383ED /* MockSix.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -245,7 +261,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E893A4A81E19AE460050638A /* MockSix.h in Headers */,
+				E83F22201E213125002383ED /* MockSix.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -472,8 +488,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E893A4871E19A5A20050638A /* MockSix.swift in Sources */,
-				E893A4881E19A5A20050638A /* MockSixInternal.swift in Sources */,
+				E83F22211E213125002383ED /* MockSix.swift in Sources */,
+				E83F22241E213125002383ED /* MockSixInternal.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -481,8 +497,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E893A4A31E19AE350050638A /* MockSix.swift in Sources */,
-				E893A4A51E19AE390050638A /* MockSixInternal.swift in Sources */,
+				E83F22221E213125002383ED /* MockSix.swift in Sources */,
+				E83F22251E213125002383ED /* MockSixInternal.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -490,8 +506,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E893A4A41E19AE360050638A /* MockSix.swift in Sources */,
-				E893A4A61E19AE390050638A /* MockSixInternal.swift in Sources */,
+				E83F22231E213125002383ED /* MockSix.swift in Sources */,
+				E83F22261E213125002383ED /* MockSixInternal.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -499,7 +515,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E8B2BE1F1E1C4FAD0054760A /* MockSixTests.swift in Sources */,
+				E83F22311E21316E002383ED /* MockSixTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -507,7 +523,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E8B2BE451E1C50C90054760A /* MockSixTests.swift in Sources */,
+				E83F22321E21316E002383ED /* MockSixTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -515,7 +531,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E8B2BE461E1C50CA0054760A /* MockSixTests.swift in Sources */,
+				E83F22331E21316E002383ED /* MockSixTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -652,7 +668,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = MockSix/Info.plist;
+				INFOPLIST_FILE = Sources/MockSix/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
@@ -680,7 +696,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = MockSix/Info.plist;
+				INFOPLIST_FILE = Sources/MockSix/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
@@ -704,7 +720,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
-				INFOPLIST_FILE = MockSix/Info.plist;
+				INFOPLIST_FILE = Sources/MockSix/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -730,7 +746,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
-				INFOPLIST_FILE = MockSix/Info.plist;
+				INFOPLIST_FILE = Sources/MockSix/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -756,7 +772,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/tvOS",
 				);
-				INFOPLIST_FILE = MockSix/Info.plist;
+				INFOPLIST_FILE = Sources/MockSix/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = me.cocoagrinder.MockSix;
@@ -781,7 +797,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/tvOS",
 				);
-				INFOPLIST_FILE = MockSix/Info.plist;
+				INFOPLIST_FILE = Sources/MockSix/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = me.cocoagrinder.MockSix;
@@ -803,7 +819,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
 				);
-				INFOPLIST_FILE = MockSixTests/Info.plist;
+				INFOPLIST_FILE = Tests/MockSixTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = me.cocoagrinder.MockSixTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -819,7 +835,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
 				);
-				INFOPLIST_FILE = MockSixTests/Info.plist;
+				INFOPLIST_FILE = Tests/MockSixTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = me.cocoagrinder.MockSixTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -835,7 +851,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
-				INFOPLIST_FILE = MockSixTests/Info.plist;
+				INFOPLIST_FILE = Tests/MockSixTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "me.cocoagrinder.MockSixTests-iOS";
@@ -853,7 +869,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
-				INFOPLIST_FILE = MockSixTests/Info.plist;
+				INFOPLIST_FILE = Tests/MockSixTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "me.cocoagrinder.MockSixTests-iOS";
@@ -871,7 +887,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/tvOS",
 				);
-				INFOPLIST_FILE = MockSixTests/Info.plist;
+				INFOPLIST_FILE = Tests/MockSixTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "me.cocoagrinder.MockSixTests-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -888,7 +904,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/tvOS",
 				);
-				INFOPLIST_FILE = MockSixTests/Info.plist;
+				INFOPLIST_FILE = Tests/MockSixTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "me.cocoagrinder.MockSixTests-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -945,6 +961,7 @@
 				E8B2BE251E1C4FAD0054760A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E8B2BE331E1C50870054760A /* Build configuration list for PBXNativeTarget "MockSixTests-iOS" */ = {
 			isa = XCConfigurationList;
@@ -953,6 +970,7 @@
 				E8B2BE351E1C50870054760A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E8B2BE421E1C509A0054760A /* Build configuration list for PBXNativeTarget "MockSixTests-tvOS" */ = {
 			isa = XCConfigurationList;
@@ -961,6 +979,7 @@
 				E8B2BE441E1C509A0054760A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
