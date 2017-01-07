@@ -13,13 +13,20 @@ matrix:
         - xcodebuild clean build test -project MockSix.xcodeproj -scheme MockSix-iOS -destination 'id=E40727B3-41FB-4D6E-B4CB-BFA87109EB12' | xcpretty
         - xcodebuild clean build test -project MockSix.xcodeproj -scheme MockSix-tvOS -destination 'id=5761D8AB-2838-4681-A528-D0949FF240C5' | xcpretty
         - pod lib lint
+    - os: osx
+      language: generic
+      script:
+        - mv Support/Package.test.swift Package.swift
+        - swift build
+        - swift test
     - os: linux
       language: generic
       sudo: required
       dist: trusty
-      before_install:
+      install:
         - eval "$(curl -sL https://gist.githubusercontent.com/kylef/5c0475ff02b7c7671d2a/raw/9f442512a46d7a2af7b850d65a7e9bd31edfb09b/swiftenv-install.sh)"
       script:
+        - . ~/.swiftenv/init
         - mv Support/Package.test.swift Package.swift
         - swift build
         - swift test
