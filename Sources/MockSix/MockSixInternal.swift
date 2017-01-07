@@ -223,8 +223,12 @@ public func resetMockSix() {
 }
 
 
-public func lock(signature: String = #file + ":\(#line):\(OSAtomicIncrement32(&globalObjectIDIndex))") -> String {
-    return signature
+public func lock(prefix: String = #file + ":\(#line):") -> String {
+    let suffix = mockQueue.sync { _ -> String in
+        globalObjectIDIndex += 1
+        return "\(globalObjectIDIndex)"
+    }
+    return prefix + suffix
 }
 
 
