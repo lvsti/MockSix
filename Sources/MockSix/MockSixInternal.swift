@@ -32,7 +32,7 @@ import Dispatch
 extension Mock where Self : AnyObject {
     public var mockSixLock: String {
         let ptr = Unmanaged.passUnretained(self).toOpaque()
-        let address = unsafeBitCast(ptr, to: Int.self)
+        let address = Int(bitPattern: ptr)
         return "\(address)"
     }
 }
