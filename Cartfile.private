@@ -1,2 +1,2 @@
-github "Quick/Quick" ~> 1.0.0
-github "Quick/Nimble" ~> 5.1.1
+github "Quick/Quick" "1712d3a606e5283efb983e1360eff33dbb43f59b"
+github "Quick/Nimble" ~> 6.1
