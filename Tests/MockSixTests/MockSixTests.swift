@@ -51,190 +51,588 @@ class MockSixSpec: QuickSpec {
         
         describe("registering invocations") {
             
-            context("returning a direct T value") {
-                it("returns the specified return value") {
-                    // when
-                    let result = dummy.registerInvocation(for: .myFunc, andReturn: [42])
-                    
-                    // then
-                    expect(result) == [42]
-                }
-                
-                it("captures the enclosing function name for the invocation") {
-                    // given
-                    func nestedFunc() {
-                        _ = dummy.registerInvocation(for: .myFunc, andReturn: [42])
+            context("non-throwing function") {
+                context("returning a direct T value") {
+                    it("returns the specified return value") {
+                        // when
+                        let result = dummy.registerInvocation(for: .myFunc, andReturn: [42])
+                        
+                        // then
+                        expect(result) == [42]
                     }
                     
-                    // when
-                    nestedFunc()
+                    it("captures the enclosing function name for the invocation") {
+                        // given
+                        func nestedFunc() {
+                            _ = dummy.registerInvocation(for: .myFunc, andReturn: [42])
+                        }
+                        
+                        // when
+                        nestedFunc()
+                        
+                        // then
+                        expect(dummy.invocations).to(haveCount(1))
+                        expect(dummy.invocations.first!.functionName).to(equal("nestedFunc()"))
+                    }
                     
-                    // then
-                    expect(dummy.invocations).to(haveCount(1))
-                    expect(dummy.invocations.first!.functionName).to(equal("nestedFunc()"))
+                    it("captures the method ID and arguments for the invocation") {
+                        // when
+                        _ = dummy.registerInvocation(for: .myFunc, args: "aaa", 42, nil, 3.14, andReturn: [42])
+                        
+                        // then
+                        expect(dummy.invocations).to(haveCount(1))
+                        let invocation = dummy.invocations.first!
+                        expect(invocation.methodID) == MockDummy.Methods.myFunc.rawValue
+                        expect(invocation.args).to(haveCount(4))
+                        expect(invocation.args[0] as! String?).to(equal("aaa"))
+                        expect(invocation.args[1] as! Int?).to(equal(42))
+                        expect(invocation.args[2]).to(beNil())
+                        expect(invocation.args[3] as! Double?).to(equal(3.14))
+                    }
                 }
-                
-                it("captures the method ID and arguments for the invocation") {
-                    // when
-                    _ = dummy.registerInvocation(for: .myFunc, args: "aaa", 42, nil, 3.14, andReturn: [42])
+
+                context("returning a direct T? value") {
+                    it("returns the specified return value") {
+                        // when
+                        let result = dummy.registerInvocation(for: .myFunc, andReturn: [42] as [Int]?)
+                        
+                        // then
+                        expect(result) == [42]
+                    }
                     
-                    // then
-                    expect(dummy.invocations).to(haveCount(1))
-                    let invocation = dummy.invocations.first!
-                    expect(invocation.methodID) == MockDummy.Methods.myFunc.rawValue
-                    expect(invocation.args).to(haveCount(4))
-                    expect(invocation.args[0] as! String?).to(equal("aaa"))
-                    expect(invocation.args[1] as! Int?).to(equal(42))
-                    expect(invocation.args[2]).to(beNil())
-                    expect(invocation.args[3] as! Double?).to(equal(3.14))
+                    it("captures the enclosing function name for the invocation") {
+                        // given
+                        func nestedFunc() {
+                            _ = dummy.registerInvocation(for: .myFunc, andReturn: [42] as [Int]?)
+                        }
+                        
+                        // when
+                        nestedFunc()
+                        
+                        // then
+                        expect(dummy.invocations).to(haveCount(1))
+                        expect(dummy.invocations.first!.functionName).to(equal("nestedFunc()"))
+                    }
+
+                    it("captures the method ID and arguments for the invocation") {
+                        // when
+                        _ = dummy.registerInvocation(for: .myFunc, args: "aaa", 42, nil, 3.14, andReturn: [42] as [Int]?)
+                        
+                        // then
+                        expect(dummy.invocations).to(haveCount(1))
+                        let invocation = dummy.invocations.first!
+                        expect(invocation.methodID) == MockDummy.Methods.myFunc.rawValue
+                        expect(invocation.args).to(haveCount(4))
+                        expect(invocation.args[0] as! String?).to(equal("aaa"))
+                        expect(invocation.args[1] as! Int?).to(equal(42))
+                        expect(invocation.args[2]).to(beNil())
+                        expect(invocation.args[3] as! Double?).to(equal(3.14))
+                    }
+                }
+            
+                context("returning a T value with closure") {
+                    it("returns the specified return value") {
+                        // when
+                        let result = dummy.registerInvocation(for: .myFunc) { _ in [42] }
+                        
+                        // then
+                        expect(result) == [42]
+                    }
+                    
+                    it("captures the enclosing function name for the invocation") {
+                        // given
+                        func nestedFunc() {
+                            _ = dummy.registerInvocation(for: .myFunc) { _ in [42] }
+                        }
+                        
+                        // when
+                        nestedFunc()
+                        
+                        // then
+                        expect(dummy.invocations).to(haveCount(1))
+                        expect(dummy.invocations.first!.functionName).to(equal("nestedFunc()"))
+                    }
+
+                    it("captures the method ID and arguments for the invocation") {
+                        // when
+                        _ = dummy.registerInvocation(for: .myFunc, args: "aaa", 42, nil, 3.14) { _ in [42] }
+                        
+                        // then
+                        expect(dummy.invocations).to(haveCount(1))
+                        let invocation = dummy.invocations.first!
+                        expect(invocation.methodID) == MockDummy.Methods.myFunc.rawValue
+                        expect(invocation.args).to(haveCount(4))
+                        expect(invocation.args[0] as! String?).to(equal("aaa"))
+                        expect(invocation.args[1] as! Int?).to(equal(42))
+                        expect(invocation.args[2]).to(beNil())
+                        expect(invocation.args[3] as! Double?).to(equal(3.14))
+                    }
+                }
+
+                context("returning a T? value with closure") {
+                    it("returns the specified return value") {
+                        // when
+                        let result = dummy.registerInvocation(for: .myFunc) { _ in [42] as [Int]? }
+                        
+                        // then
+                        expect(result) == [42]
+                    }
+                    
+                    it("captures the enclosing function name for the invocation") {
+                        // given
+                        func nestedFunc() {
+                            _ = dummy.registerInvocation(for: .myFunc) { _ in [42] as [Int]? }
+                        }
+                        
+                        // when
+                        nestedFunc()
+                        
+                        // then
+                        expect(dummy.invocations).to(haveCount(1))
+                        expect(dummy.invocations.first!.functionName).to(equal("nestedFunc()"))
+                    }
+
+                    it("captures the method ID and arguments for the invocation") {
+                        // when
+                        _ = dummy.registerInvocation(for: .myFunc, args: "aaa", 42, nil, 3.14) { _ in [42] as [Int]? }
+                        
+                        // then
+                        expect(dummy.invocations).to(haveCount(1))
+                        let invocation = dummy.invocations.first!
+                        expect(invocation.methodID) == MockDummy.Methods.myFunc.rawValue
+                        expect(invocation.args).to(haveCount(4))
+                        expect(invocation.args[0] as! String?).to(equal("aaa"))
+                        expect(invocation.args[1] as! Int?).to(equal(42))
+                        expect(invocation.args[2]).to(beNil())
+                        expect(invocation.args[3] as! Double?).to(equal(3.14))
+                    }
+                }
+
+                context("returning void with a closure") {
+                    it("captures the enclosing function name for the invocation") {
+                        // given
+                        func nestedFunc() {
+                            dummy.registerInvocation(for: .myFunc)
+                        }
+                        
+                        // when
+                        nestedFunc()
+                        
+                        // then
+                        expect(dummy.invocations).to(haveCount(1))
+                        expect(dummy.invocations.first!.functionName).to(equal("nestedFunc()"))
+                    }
+
+                    it("captures the method ID and arguments for the invocation") {
+                        // when
+                        _ = dummy.registerInvocation(for: .myFunc, args: "aaa", 42, nil, 3.14) { _ in }
+                        
+                        // then
+                        expect(dummy.invocations).to(haveCount(1))
+                        let invocation = dummy.invocations.first!
+                        expect(invocation.methodID) == MockDummy.Methods.myFunc.rawValue
+                        expect(invocation.args).to(haveCount(4))
+                        expect(invocation.args[0] as! String?).to(equal("aaa"))
+                        expect(invocation.args[1] as! Int?).to(equal(42))
+                        expect(invocation.args[2]).to(beNil())
+                        expect(invocation.args[3] as! Double?).to(equal(3.14))
+                    }
                 }
             }
-
-            context("returning a direct T? value") {
-                it("returns the specified return value") {
-                    // when
-                    let result = dummy.registerInvocation(for: .myFunc, andReturn: [42] as [Int]?)
+            
+            context("throwing function") {
+                context("returning a direct T value") {
+                    it("returns the specified return value") {
+                        // when
+                        let result = try! dummy.registerThrowingInvocation(for: .myFunc, andReturn: [42])
+                        
+                        // then
+                        expect(result) == [42]
+                    }
                     
-                    // then
-                    expect(result) == [42]
+                    it("captures the enclosing function name for the invocation") {
+                        // given
+                        func nestedFunc() {
+                            _ = try! dummy.registerThrowingInvocation(for: .myFunc, andReturn: [42])
+                        }
+                        
+                        // when
+                        nestedFunc()
+                        
+                        // then
+                        expect(dummy.invocations).to(haveCount(1))
+                        expect(dummy.invocations.first!.functionName).to(equal("nestedFunc()"))
+                    }
+                    
+                    it("captures the method ID and arguments for the invocation") {
+                        // when
+                        _ = try! dummy.registerThrowingInvocation(for: .myFunc, args: "aaa", 42, nil, 3.14, andReturn: [42])
+                        
+                        // then
+                        expect(dummy.invocations).to(haveCount(1))
+                        let invocation = dummy.invocations.first!
+                        expect(invocation.methodID) == MockDummy.Methods.myFunc.rawValue
+                        expect(invocation.args).to(haveCount(4))
+                        expect(invocation.args[0] as! String?).to(equal("aaa"))
+                        expect(invocation.args[1] as! Int?).to(equal(42))
+                        expect(invocation.args[2]).to(beNil())
+                        expect(invocation.args[3] as! Double?).to(equal(3.14))
+                    }
                 }
                 
-                it("captures the enclosing function name for the invocation") {
-                    // given
-                    func nestedFunc() {
-                        _ = dummy.registerInvocation(for: .myFunc, andReturn: [42] as [Int]?)
+                context("returning a direct T? value") {
+                    it("returns the specified return value") {
+                        // when
+                        let result = try! dummy.registerThrowingInvocation(for: .myFunc, andReturn: [42] as [Int]?)
+                        
+                        // then
+                        expect(result) == [42]
                     }
                     
-                    // when
-                    nestedFunc()
+                    it("captures the enclosing function name for the invocation") {
+                        // given
+                        func nestedFunc() {
+                            _ = try! dummy.registerThrowingInvocation(for: .myFunc, andReturn: [42] as [Int]?)
+                        }
+                        
+                        // when
+                        nestedFunc()
+                        
+                        // then
+                        expect(dummy.invocations).to(haveCount(1))
+                        expect(dummy.invocations.first!.functionName).to(equal("nestedFunc()"))
+                    }
                     
-                    // then
-                    expect(dummy.invocations).to(haveCount(1))
-                    expect(dummy.invocations.first!.functionName).to(equal("nestedFunc()"))
-                }
-
-                it("captures the method ID and arguments for the invocation") {
-                    // when
-                    _ = dummy.registerInvocation(for: .myFunc, args: "aaa", 42, nil, 3.14, andReturn: [42] as [Int]?)
-                    
-                    // then
-                    expect(dummy.invocations).to(haveCount(1))
-                    let invocation = dummy.invocations.first!
-                    expect(invocation.methodID) == MockDummy.Methods.myFunc.rawValue
-                    expect(invocation.args).to(haveCount(4))
-                    expect(invocation.args[0] as! String?).to(equal("aaa"))
-                    expect(invocation.args[1] as! Int?).to(equal(42))
-                    expect(invocation.args[2]).to(beNil())
-                    expect(invocation.args[3] as! Double?).to(equal(3.14))
-                }
-            }
-        
-            context("returning a T value with closure") {
-                it("returns the specified return value") {
-                    // when
-                    let result = dummy.registerInvocation(for: .myFunc) { _ in [42] }
-                    
-                    // then
-                    expect(result) == [42]
+                    it("captures the method ID and arguments for the invocation") {
+                        // when
+                        _ = try! dummy.registerThrowingInvocation(for: .myFunc, args: "aaa", 42, nil, 3.14, andReturn: [42] as [Int]?)
+                        
+                        // then
+                        expect(dummy.invocations).to(haveCount(1))
+                        let invocation = dummy.invocations.first!
+                        expect(invocation.methodID) == MockDummy.Methods.myFunc.rawValue
+                        expect(invocation.args).to(haveCount(4))
+                        expect(invocation.args[0] as! String?).to(equal("aaa"))
+                        expect(invocation.args[1] as! Int?).to(equal(42))
+                        expect(invocation.args[2]).to(beNil())
+                        expect(invocation.args[3] as! Double?).to(equal(3.14))
+                    }
                 }
                 
-                it("captures the enclosing function name for the invocation") {
-                    // given
-                    func nestedFunc() {
-                        _ = dummy.registerInvocation(for: .myFunc) { _ in [42] }
+                context("returning a T value with closure") {
+                    
+                    context("the closure returns normally") {
+
+                        it("returns the specified return value") {
+                            // when
+                            let result = try! dummy.registerThrowingInvocation(for: .myFunc) { _ in [42] }
+                            
+                            // then
+                            expect(result) == [42]
+                        }
+                        
+                        it("captures the enclosing function name for the invocation") {
+                            // given
+                            func nestedFunc() {
+                                _ = try! dummy.registerThrowingInvocation(for: .myFunc) { _ in [42] }
+                            }
+                            
+                            // when
+                            nestedFunc()
+                            
+                            // then
+                            expect(dummy.invocations).to(haveCount(1))
+                            expect(dummy.invocations.first!.functionName).to(equal("nestedFunc()"))
+                        }
+                        
+                        it("captures the method ID and arguments for the invocation") {
+                            // when
+                            _ = try! dummy.registerThrowingInvocation(for: .myFunc, args: "aaa", 42, nil, 3.14) { _ in [42] }
+                            
+                            // then
+                            expect(dummy.invocations).to(haveCount(1))
+                            let invocation = dummy.invocations.first!
+                            expect(invocation.methodID) == MockDummy.Methods.myFunc.rawValue
+                            expect(invocation.args).to(haveCount(4))
+                            expect(invocation.args[0] as! String?).to(equal("aaa"))
+                            expect(invocation.args[1] as! Int?).to(equal(42))
+                            expect(invocation.args[2]).to(beNil())
+                            expect(invocation.args[3] as! Double?).to(equal(3.14))
+                        }
+
                     }
                     
-                    // when
-                    nestedFunc()
-                    
-                    // then
-                    expect(dummy.invocations).to(haveCount(1))
-                    expect(dummy.invocations.first!.functionName).to(equal("nestedFunc()"))
-                }
+                    context("the closure throws") {
+                        
+                        it("captures the enclosing function name for the invocation") {
+                            // given
+                            func nestedFunc() throws {
+                                _ = try dummy.registerThrowingInvocation(for: .myFunc) { _ -> [Int] in
+                                    throw NSError(domain: "MockSix", code: -1, userInfo: nil)
+                                }
+                            }
+                            
+                            // when
+                            do {
+                                try nestedFunc()
+                            }
+                            catch {
+                            }
+                            
+                            // then
+                            expect(dummy.invocations).to(haveCount(1))
+                            expect(dummy.invocations.first!.functionName).to(equal("nestedFunc()"))
+                        }
+                        
+                        it("captures the method ID and arguments for the invocation") {
+                            // when
+                            do {
+                                _ = try dummy.registerThrowingInvocation(for: .myFunc, args: "aaa", 42, nil, 3.14) { _ -> [Int] in
+                                    throw NSError(domain: "MockSix", code: -1, userInfo: nil)
+                                }
+                            }
+                            catch {
+                            }
+                            
+                            // then
+                            expect(dummy.invocations).to(haveCount(1))
+                            let invocation = dummy.invocations.first!
+                            expect(invocation.methodID) == MockDummy.Methods.myFunc.rawValue
+                            expect(invocation.args).to(haveCount(4))
+                            expect(invocation.args[0] as! String?).to(equal("aaa"))
+                            expect(invocation.args[1] as! Int?).to(equal(42))
+                            expect(invocation.args[2]).to(beNil())
+                            expect(invocation.args[3] as! Double?).to(equal(3.14))
+                        }
+                        
+                        it("rethrows the error") {
+                            // given
+                            var didThrow = false
+                            
+                            // when
+                            do {
+                                _ = try dummy.registerThrowingInvocation(for: .myFunc, args: "aaa", 42, nil, 3.14) { _ -> [Int] in
+                                    throw NSError(domain: "MockSix", code: -1, userInfo: nil)
+                                }
+                            }
+                            catch {
+                                didThrow = true
+                            }
+                            
+                            // then
+                            expect(didThrow).to(beTrue())
+                        }
+                        
+                    }
 
-                it("captures the method ID and arguments for the invocation") {
-                    // when
-                    _ = dummy.registerInvocation(for: .myFunc, args: "aaa", 42, nil, 3.14) { _ in [42] }
-                    
-                    // then
-                    expect(dummy.invocations).to(haveCount(1))
-                    let invocation = dummy.invocations.first!
-                    expect(invocation.methodID) == MockDummy.Methods.myFunc.rawValue
-                    expect(invocation.args).to(haveCount(4))
-                    expect(invocation.args[0] as! String?).to(equal("aaa"))
-                    expect(invocation.args[1] as! Int?).to(equal(42))
-                    expect(invocation.args[2]).to(beNil())
-                    expect(invocation.args[3] as! Double?).to(equal(3.14))
-                }
-            }
-
-            context("returning a T? value with closure") {
-                it("returns the specified return value") {
-                    // when
-                    let result = dummy.registerInvocation(for: .myFunc) { _ in [42] as [Int]? }
-                    
-                    // then
-                    expect(result) == [42]
                 }
                 
-                it("captures the enclosing function name for the invocation") {
-                    // given
-                    func nestedFunc() {
-                        _ = dummy.registerInvocation(for: .myFunc) { _ in [42] as [Int]? }
+                context("returning a T? value with closure") {
+
+                    context("the closure returns normally") {
+                        
+                        it("returns the specified return value") {
+                            // when
+                            let result = try! dummy.registerThrowingInvocation(for: .myFunc) { _ in [42] as [Int]? }
+                            
+                            // then
+                            expect(result) == [42]
+                        }
+                        
+                        it("captures the enclosing function name for the invocation") {
+                            // given
+                            func nestedFunc() {
+                                _ = try! dummy.registerThrowingInvocation(for: .myFunc) { _ in [42] as [Int]? }
+                            }
+                            
+                            // when
+                            nestedFunc()
+                            
+                            // then
+                            expect(dummy.invocations).to(haveCount(1))
+                            expect(dummy.invocations.first!.functionName).to(equal("nestedFunc()"))
+                        }
+                        
+                        it("captures the method ID and arguments for the invocation") {
+                            // when
+                            _ = try! dummy.registerThrowingInvocation(for: .myFunc, args: "aaa", 42, nil, 3.14) { _ in [42] as [Int]? }
+                            
+                            // then
+                            expect(dummy.invocations).to(haveCount(1))
+                            let invocation = dummy.invocations.first!
+                            expect(invocation.methodID) == MockDummy.Methods.myFunc.rawValue
+                            expect(invocation.args).to(haveCount(4))
+                            expect(invocation.args[0] as! String?).to(equal("aaa"))
+                            expect(invocation.args[1] as! Int?).to(equal(42))
+                            expect(invocation.args[2]).to(beNil())
+                            expect(invocation.args[3] as! Double?).to(equal(3.14))
+                        }
+                        
                     }
                     
-                    // when
-                    nestedFunc()
-                    
-                    // then
-                    expect(dummy.invocations).to(haveCount(1))
-                    expect(dummy.invocations.first!.functionName).to(equal("nestedFunc()"))
+                    context("the closure throws") {
+                        
+                        it("captures the enclosing function name for the invocation") {
+                            // given
+                            func nestedFunc() throws {
+                                _ = try dummy.registerThrowingInvocation(for: .myFunc) { _ -> [Int]? in
+                                    throw NSError(domain: "MockSix", code: -1, userInfo: nil)
+                                }
+                            }
+                            
+                            // when
+                            do {
+                                try nestedFunc()
+                            }
+                            catch {
+                            }
+                            
+                            // then
+                            expect(dummy.invocations).to(haveCount(1))
+                            expect(dummy.invocations.first!.functionName).to(equal("nestedFunc()"))
+                        }
+                        
+                        it("captures the method ID and arguments for the invocation") {
+                            // when
+                            do {
+                                _ = try dummy.registerThrowingInvocation(for: .myFunc, args: "aaa", 42, nil, 3.14) { _ -> [Int]? in
+                                    throw NSError(domain: "MockSix", code: -1, userInfo: nil)
+                                }
+                            }
+                            catch {
+                            }
+                            
+                            // then
+                            expect(dummy.invocations).to(haveCount(1))
+                            let invocation = dummy.invocations.first!
+                            expect(invocation.methodID) == MockDummy.Methods.myFunc.rawValue
+                            expect(invocation.args).to(haveCount(4))
+                            expect(invocation.args[0] as! String?).to(equal("aaa"))
+                            expect(invocation.args[1] as! Int?).to(equal(42))
+                            expect(invocation.args[2]).to(beNil())
+                            expect(invocation.args[3] as! Double?).to(equal(3.14))
+                        }
+                        
+                        it("rethrows the error") {
+                            // given
+                            var didThrow = false
+                            
+                            // when
+                            do {
+                                _ = try dummy.registerThrowingInvocation(for: .myFunc, args: "aaa", 42, nil, 3.14) { _ -> [Int]? in
+                                    throw NSError(domain: "MockSix", code: -1, userInfo: nil)
+                                }
+                            }
+                            catch {
+                                didThrow = true
+                            }
+                            
+                            // then
+                            expect(didThrow).to(beTrue())
+                        }
+                        
+                    }
+                
                 }
+                
+                context("returning void with a closure") {
 
-                it("captures the method ID and arguments for the invocation") {
-                    // when
-                    _ = dummy.registerInvocation(for: .myFunc, args: "aaa", 42, nil, 3.14) { _ in [42] as [Int]? }
-                    
-                    // then
-                    expect(dummy.invocations).to(haveCount(1))
-                    let invocation = dummy.invocations.first!
-                    expect(invocation.methodID) == MockDummy.Methods.myFunc.rawValue
-                    expect(invocation.args).to(haveCount(4))
-                    expect(invocation.args[0] as! String?).to(equal("aaa"))
-                    expect(invocation.args[1] as! Int?).to(equal(42))
-                    expect(invocation.args[2]).to(beNil())
-                    expect(invocation.args[3] as! Double?).to(equal(3.14))
-                }
-            }
-
-            context("returning void with a closure") {
-                it("captures the enclosing function name for the invocation") {
-                    // given
-                    func nestedFunc() {
-                        dummy.registerInvocation(for: .myFunc)
+                    context("the closure returns normally") {
+                        
+                        it("captures the enclosing function name for the invocation") {
+                            // given
+                            func nestedFunc() {
+                                _ = try! dummy.registerThrowingInvocation(for: .myFunc) { _ in }
+                            }
+                            
+                            // when
+                            nestedFunc()
+                            
+                            // then
+                            expect(dummy.invocations).to(haveCount(1))
+                            expect(dummy.invocations.first!.functionName).to(equal("nestedFunc()"))
+                        }
+                        
+                        it("captures the method ID and arguments for the invocation") {
+                            // when
+                            _ = try! dummy.registerThrowingInvocation(for: .myFunc, args: "aaa", 42, nil, 3.14) { _ in }
+                            
+                            // then
+                            expect(dummy.invocations).to(haveCount(1))
+                            let invocation = dummy.invocations.first!
+                            expect(invocation.methodID) == MockDummy.Methods.myFunc.rawValue
+                            expect(invocation.args).to(haveCount(4))
+                            expect(invocation.args[0] as! String?).to(equal("aaa"))
+                            expect(invocation.args[1] as! Int?).to(equal(42))
+                            expect(invocation.args[2]).to(beNil())
+                            expect(invocation.args[3] as! Double?).to(equal(3.14))
+                        }
+                        
                     }
                     
-                    // when
-                    nestedFunc()
-                    
-                    // then
-                    expect(dummy.invocations).to(haveCount(1))
-                    expect(dummy.invocations.first!.functionName).to(equal("nestedFunc()"))
-                }
+                    context("the closure throws") {
+                        
+                        it("captures the enclosing function name for the invocation") {
+                            // given
+                            func nestedFunc() throws {
+                                _ = try dummy.registerThrowingInvocation(for: .myFunc) { _ in
+                                    throw NSError(domain: "MockSix", code: -1, userInfo: nil)
+                                }
+                            }
+                            
+                            // when
+                            do {
+                                try nestedFunc()
+                            }
+                            catch {
+                            }
+                            
+                            // then
+                            expect(dummy.invocations).to(haveCount(1))
+                            expect(dummy.invocations.first!.functionName).to(equal("nestedFunc()"))
+                        }
+                        
+                        it("captures the method ID and arguments for the invocation") {
+                            // when
+                            do {
+                                _ = try dummy.registerThrowingInvocation(for: .myFunc, args: "aaa", 42, nil, 3.14) { _ in
+                                    throw NSError(domain: "MockSix", code: -1, userInfo: nil)
+                                }
+                            }
+                            catch {
+                            }
+                            
+                            // then
+                            expect(dummy.invocations).to(haveCount(1))
+                            let invocation = dummy.invocations.first!
+                            expect(invocation.methodID) == MockDummy.Methods.myFunc.rawValue
+                            expect(invocation.args).to(haveCount(4))
+                            expect(invocation.args[0] as! String?).to(equal("aaa"))
+                            expect(invocation.args[1] as! Int?).to(equal(42))
+                            expect(invocation.args[2]).to(beNil())
+                            expect(invocation.args[3] as! Double?).to(equal(3.14))
+                        }
+                        
+                        it("rethrows the error") {
+                            // given
+                            var didThrow = false
+                            
+                            // when
+                            do {
+                                _ = try dummy.registerThrowingInvocation(for: .myFunc, args: "aaa", 42, nil, 3.14) { _ in
+                                    throw NSError(domain: "MockSix", code: -1, userInfo: nil)
+                                }
+                            }
+                            catch {
+                                didThrow = true
+                            }
+                            
+                            // then
+                            expect(didThrow).to(beTrue())
+                        }
+                        
+                    }
 
-                it("captures the method ID and arguments for the invocation") {
-                    // when
-                    _ = dummy.registerInvocation(for: .myFunc, args: "aaa", 42, nil, 3.14) { _ in }
-                    
-                    // then
-                    expect(dummy.invocations).to(haveCount(1))
-                    let invocation = dummy.invocations.first!
-                    expect(invocation.methodID) == MockDummy.Methods.myFunc.rawValue
-                    expect(invocation.args).to(haveCount(4))
-                    expect(invocation.args[0] as! String?).to(equal("aaa"))
-                    expect(invocation.args[1] as! Int?).to(equal(42))
-                    expect(invocation.args[2]).to(beNil())
-                    expect(invocation.args[3] as! Double?).to(equal(3.14))
                 }
             }
         }
@@ -304,54 +702,142 @@ class MockSixSpec: QuickSpec {
             }
             
             context("returning a T value with closure") {
-                beforeEach {
-                    dummy.stub(.myFunc) { _ in 42 }
-                }
+                
+                context("the closure returns normally") {
 
-                it("overrides the default return value") {
-                    // when
-                    let result = dummy.registerInvocation(for: .myFunc, andReturn: 0)
+                    beforeEach {
+                        dummy.stub(.myFunc) { _ in 42 }
+                    }
                     
-                    // then
-                    expect(result) == 42
+                    it("overrides the default return value") {
+                        // when
+                        let result = dummy.registerInvocation(for: .myFunc, andReturn: 0)
+                        
+                        // then
+                        expect(result) == 42
+                    }
+                    
+                    it("overwrites the previously set stub") {
+                        // when
+                        dummy.stub(.myFunc) { _ in 43 }
+                        
+                        // then
+                        let result = dummy.registerInvocation(for: .myFunc, andReturn: 0)
+                        expect(result) == 43
+                    }
+
                 }
                 
-                it("overwrites the previously set stub") {
-                    // when
-                    dummy.stub(.myFunc) { _ in 43 }
+                context("the closure throws") {
+
+                    beforeEach {
+                        dummy.stub(.myFunc) { _ -> Int in
+                            throw NSError(domain: "MockSix", code: -1, userInfo: nil)
+                        }
+                    }
                     
-                    // then
-                    let result = dummy.registerInvocation(for: .myFunc, andReturn: 0)
-                    expect(result) == 43
+                    it("overrides the default return value") {
+                        // given
+                        var didThrow = false
+                        
+                        // when
+                        do {
+                            _ = try dummy.registerThrowingInvocation(for: .myFunc, andReturn: 0)
+                        }
+                        catch {
+                            didThrow = true
+                        }
+                        
+                        // then
+                        expect(didThrow).to(beTrue())
+                    }
+                    
+                    it("overwrites the previously set stub") {
+                        // when
+                        dummy.stub(.myFunc) { _ in 43 }
+                        
+                        // then
+                        do {
+                            let result = try dummy.registerThrowingInvocation(for: .myFunc, andReturn: 0)
+                            expect(result) == 43
+                        }
+                        catch {
+                        }
+                    }
+
                 }
 
             }
 
             context("returning a T? value with closure") {
-                beforeEach {
-                    dummy.stub(.myFunc) { _ in 42 as Int? }
+
+                context("the closure returns normally") {
+                    
+                    beforeEach {
+                        dummy.stub(.myFunc) { _ in 42 as Int? }
+                    }
+                    
+                    it("overrides the default return value") {
+                        // when
+                        let result = dummy.registerInvocation(for: .myFunc, andReturn: 0 as Int?)
+                        
+                        // then
+                        expect(result) == 42
+                    }
+                    
+                    it("overwrites the previously set stub") {
+                        // when
+                        dummy.stub(.myFunc) { _ in 43 as Int? }
+                        
+                        // then
+                        let result = dummy.registerInvocation(for: .myFunc, andReturn: 0 as Int?)
+                        expect(result) == 43
+                    }
+                    
                 }
                 
-                it("overrides the default return value") {
-                    // when
-                    let result = dummy.registerInvocation(for: .myFunc, andReturn: 0 as Int?)
+                context("the closure throws") {
                     
-                    // then
-                    expect(result) == 42
-                }
-                
-                it("overwrites the previously set stub") {
-                    // when
-                    dummy.stub(.myFunc) { _ in 43 as Int? }
+                    beforeEach {
+                        dummy.stub(.myFunc) { _ -> Int? in
+                            throw NSError(domain: "MockSix", code: -1, userInfo: nil)
+                        }
+                    }
                     
-                    // then
-                    let result = dummy.registerInvocation(for: .myFunc, andReturn: 0 as Int?)
-                    expect(result) == 43
+                    it("overrides the default return value") {
+                        // given
+                        var didThrow = false
+                        
+                        // when
+                        do {
+                            _ = try dummy.registerThrowingInvocation(for: .myFunc, andReturn: 0 as Int?)
+                        }
+                        catch {
+                            didThrow = true
+                        }
+                        
+                        // then
+                        expect(didThrow).to(beTrue())
+                    }
+                    
+                    it("overwrites the previously set stub") {
+                        // when
+                        dummy.stub(.myFunc) { _ in 43 as Int? }
+                        
+                        // then
+                        do {
+                            let result = try dummy.registerThrowingInvocation(for: .myFunc, andReturn: 0 as Int?)
+                            expect(result) == 43
+                        }
+                        catch {
+                        }
+                    }
+                    
                 }
 
             }
             
-            context("returning direct T values multiple times ") {
+            context("returning direct T values multiple times") {
                 beforeEach {
                     dummy.stub(.myFunc, andReturn: 42, times: 1, afterwardsReturn: 43)
                 }
@@ -388,7 +874,7 @@ class MockSixSpec: QuickSpec {
 
             }
 
-            context("returning direct T? values multiple times ") {
+            context("returning direct T? values multiple times") {
                 beforeEach {
                     dummy.stub(.myFunc, andReturn: 42 as Int?, times: 1, afterwardsReturn: 43 as Int?)
                 }

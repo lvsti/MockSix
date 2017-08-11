@@ -28,6 +28,7 @@
 
 import Dispatch
 
+// MARK: - common stuff
 
 extension Mock where Self : AnyObject {
     public var mockSixLock: String {
@@ -50,11 +51,17 @@ extension Mock where MockMethod.RawValue == Int {
         }
     }
     
-    private func identifier(for method: MockMethod) -> String {
+}
+
+// MARK: - stubbing methods
+
+extension Mock where MockMethod.RawValue == Int {
+
+    fileprivate func identifier(for method: MockMethod) -> String {
         return "method-\(method.rawValue)"
     }
     
-    private func registerStub<T>(for method: MockMethod, withBlock block: @escaping ([Any?]) -> T) {
+    private func registerStub<T>(for method: MockMethod, withBlock block: @escaping ([Any?]) throws -> T) {
         let id = identifier(for: method)
         mockQueue.sync {
             var blocks = mockBlocks[mockSixLock] ?? [:] as [String: Any]
@@ -63,7 +70,7 @@ extension Mock where MockMethod.RawValue == Int {
         }
     }
 
-    private func registerStub<T>(for method: MockMethod, withBlock block: @escaping ([Any?]) -> T?) {
+    private func registerStub<T>(for method: MockMethod, withBlock block: @escaping ([Any?]) throws -> T?) {
         let id = identifier(for: method)
         mockQueue.sync {
             var blocks = mockBlocks[mockSixLock] ?? [:] as [String: Any]
@@ -81,11 +88,11 @@ extension Mock where MockMethod.RawValue == Int {
         }
     }
     
-    public func stub<T>(_ method: MockMethod, withBlock block: @escaping ([Any?]) -> T) {
+    public func stub<T>(_ method: MockMethod, withBlock block: @escaping ([Any?]) throws -> T) {
         registerStub(for: method, withBlock: block)
     }
 
-    public func stub<T>(_ method: MockMethod, withBlock block: @escaping ([Any?]) -> T?) {
+    public func stub<T>(_ method: MockMethod, withBlock block: @escaping ([Any?]) throws -> T?) {
         registerStub(for: method, withBlock: block)
     }
 
@@ -113,94 +120,149 @@ extension Mock where MockMethod.RawValue == Int {
         })
     }
 
+}
+
+// MARK: - invocation proxies
+
+extension Mock where MockMethod.RawValue == Int {
+
     private func registerInvocation<T>(for method: MockMethod,
                                        function: String = #function,
                                        args: [Any?],
-                                       returns: ([Any?]) -> T? = { _ in nil }) -> T? {
+                                       returns: ([Any?]) throws -> T? = { _ in nil }) throws -> T? {
         logInvocation(method: method, functionName: function, arguments: args)
         
         let id = identifier(for: method)
         let registeredStub = mockQueue.sync { mockBlocks[mockSixLock]?[id] }
 
         if let registeredStub = registeredStub {
-            guard let typedStub = registeredStub as? ([Any?]) -> T? else {
+            guard let typedStub = registeredStub as? ([Any?]) throws -> T? else {
                 fatalError("MockSix: Incompatible block of type '\(type(of: registeredStub))' registered for function '\(function)' requiring block type '([Any?]) -> \(T.self)'")
             }
-            return typedStub(args)
+            return try typedStub(args)
         }
         else {
-            return returns(args)
+            return try returns(args)
         }
     }
     
     private func registerInvocation<T>(for method: MockMethod,
                                        function: String = #function,
                                        args: [Any?],
-                                       returns: ([Any?]) -> T) -> T {
+                                       returns: ([Any?]) throws -> T) throws -> T {
         logInvocation(method: method, functionName: function, arguments: args)
         
         let id = identifier(for: method)
         let registeredStub = mockQueue.sync { mockBlocks[mockSixLock]?[id] }
 
         if let registeredStub = registeredStub {
-            guard let typedStub = registeredStub as? ([Any?]) -> T else {
+            guard let typedStub = registeredStub as? ([Any?]) throws -> T else {
                 fatalError("MockSix: Incompatible block of type '\(type(of: registeredStub))' registered for function '\(function)' requiring block type '([Any?]) -> \(T.self)'")
             }
-            return typedStub(args)
+            return try typedStub(args)
         }
         else {
-            return returns(args)
+            return try returns(args)
+        }
+    }
+
+    public func registerThrowingInvocation<T>(for method: MockMethod,
+                                              function: String = #function,
+                                              args: Any?...,
+                                              returns: ([Any?]) throws -> T? = { _ in nil }) throws -> T? {
+        return try registerInvocation(for: method, function: function, args: args, returns: returns)
+    }
+
+    public func registerThrowingInvocation<T>(for method: MockMethod,
+                                              function: String = #function,
+                                              args: Any?...,
+                                              returns: ([Any?]) throws -> T) throws -> T {
+        return try registerInvocation(for: method, function: function, args: args, returns: returns)
+    }
+
+    public func registerThrowingInvocation<T>(for method: MockMethod,
+                                              function: String = #function,
+                                              args: Any?...,
+                                              andReturn value: T?) throws -> T? {
+        return try registerInvocation(for: method, function: function, args: args, returns: { _ -> T? in value })
+    }
+    
+    public func registerThrowingInvocation<T>(for method: MockMethod,
+                                              function: String = #function,
+                                              args: Any?...,
+                                              andReturn value: T) throws -> T {
+        return try registerInvocation(for: method, function: function, args: args, returns: { _ -> T in value })
+    }
+
+    public func registerThrowingInvocation(for method: MockMethod,
+                                           function: String = #function,
+                                           args: Any?...,
+                                           returns: ([Any?]) throws -> Void = { _ in }) throws {
+        logInvocation(method: method, functionName: function, arguments: args)
+        
+        let id = identifier(for: method)
+        let registeredStub = mockQueue.sync { mockBlocks[mockSixLock]?[id] }
+        
+        if let registeredStub = registeredStub {
+            guard let typedStub = registeredStub as? ([Any?]) throws -> Void else {
+                fatalError("MockSix: Incompatible block of type '\(type(of: registeredStub))' registered for function '\(function)' requiring block type '([Any?]) -> ()'")
+            }
+            try typedStub(args)
+        }
+        else {
+            try returns(args)
         }
     }
 
     public func registerInvocation<T>(for method: MockMethod,
                                       function: String = #function,
                                       args: Any?...,
-                                      returns: ([Any?]) -> T? = { _ in nil }) -> T? {
-        return registerInvocation(for: method, function: function, args: args, returns: returns)
+                                      returns: ([Any?]) throws -> T? = { _ in nil }) -> T? {
+        return try! registerInvocation(for: method, function: function, args: args, returns: returns)
     }
 
     public func registerInvocation<T>(for method: MockMethod,
                                    function: String = #function,
                                    args: Any?...,
-                                   returns: ([Any?]) -> T) -> T {
-        return registerInvocation(for: method, function: function, args: args, returns: returns)
+                                   returns: ([Any?]) throws -> T) -> T {
+        return try! registerInvocation(for: method, function: function, args: args, returns: returns)
     }
 
     public func registerInvocation<T>(for method: MockMethod,
                                       function: String = #function,
                                       args: Any?...,
                                       andReturn value: T?) -> T? {
-        return registerInvocation(for: method, function: function, args: args, returns: { _ -> T? in value })
+        return try! registerInvocation(for: method, function: function, args: args, returns: { _ -> T? in value })
     }
     
     public func registerInvocation<T>(for method: MockMethod,
                                       function: String = #function,
                                       args: Any?...,
                                       andReturn value: T) -> T {
-        return registerInvocation(for: method, function: function, args: args, returns: { _ -> T in value })
+        return try! registerInvocation(for: method, function: function, args: args, returns: { _ -> T in value })
     }
 
     public func registerInvocation(for method: MockMethod,
                                    function: String = #function,
                                    args: Any?...,
-                                   returns: ([Any?]) -> Void = { _ in }) {
+                                   returns: ([Any?]) throws -> Void = { _ in }) {
         logInvocation(method: method, functionName: function, arguments: args)
         
         let id = identifier(for: method)
         let registeredStub = mockQueue.sync { mockBlocks[mockSixLock]?[id] }
         
         if let registeredStub = registeredStub {
-            guard let typedStub = registeredStub as? ([Any?]) -> Void else {
+            guard let typedStub = registeredStub as? ([Any?]) throws -> Void else {
                 fatalError("MockSix: Incompatible block of type '\(type(of: registeredStub))' registered for function '\(function)' requiring block type '([Any?]) -> ()'")
             }
-            typedStub(args)
+            try! typedStub(args)
         }
         else {
-            returns(args)
+            try! returns(args)
         }
     }
-    
+
+
     // Utility stuff
     private func logInvocation(method: MockMethod, functionName: String, arguments: [Any?]) {
         var invocations = [MockInvocation]()

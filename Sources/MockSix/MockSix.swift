@@ -69,7 +69,7 @@ public protocol Mock {
     /// - parameter function: Set automatically to `#function`.
     /// - parameter args: The arguments passed to this method. Used for logging in `self.invocations`.
     /// - parameter returns: A closure to be executed by default when this function is invoked.
-    func registerInvocation<T>(for method: MockMethod, function: String, args: Any?..., returns: ([Any?]) -> T?) -> T?
+    func registerInvocation<T>(for method: MockMethod, function: String, args: Any?..., returns: ([Any?]) throws -> T?) -> T?
 
     /// Adds the signature of the containing function to `self.invocations` and
     /// performs the block registered for `method`, if any. The return closure
@@ -78,7 +78,7 @@ public protocol Mock {
     /// - parameter function: Set automatically to `#function`.
     /// - parameter args: The arguments passed to this method. Used for logging in `self.invocations`.
     /// - parameter returns: A closure to be executed by default when this function is invoked.
-    func registerInvocation<T>(for method: MockMethod, function: String, args: Any?..., returns: ([Any?]) -> T) -> T
+    func registerInvocation<T>(for method: MockMethod, function: String, args: Any?..., returns: ([Any?]) throws -> T) -> T
     
     /// Adds the signature of the containing function to `self.invocations` and
     /// performs the block registered for `method`, if any. The return closure
@@ -105,8 +105,69 @@ public protocol Mock {
     /// - parameter function: Set automatically to `#function`.
     /// - parameter args: The arguments passed to this method. Used for logging in `self.invocations`.
     /// - parameter returns: A closure to be executed by default when this function is invoked.
-    func registerInvocation(for method: MockMethod, function: String, args: Any?..., returns: ([Any?]) -> Void)
+    func registerInvocation(for method: MockMethod, function: String, args: Any?..., returns: ([Any?]) throws -> Void)
+
     
+    /// Adds the signature of the containing function to `self.invocations` and
+    /// performs the block registered for `method`, if any. The return closure
+    /// receives the method's arguments as an `[Any?]`.
+    /// - parameter method: The method ID to register the invocation for.
+    /// - parameter function: Set automatically to `#function`.
+    /// - parameter args: The arguments passed to this method. Used for logging in `self.invocations`.
+    /// - parameter returns: A closure to be executed by default when this function is invoked.
+    func registerThrowingInvocation<T>(for method: MockMethod,
+                                       function: String,
+                                       args: Any?...,
+                                       returns: ([Any?]) throws -> T?) throws -> T?
+
+    /// Adds the signature of the containing function to `self.invocations` and
+    /// performs the block registered for `method`, if any. The return closure
+    /// receives the method's arguments as an `[Any?]`.
+    /// - parameter method: The method ID to register the invocation for.
+    /// - parameter function: Set automatically to `#function`.
+    /// - parameter args: The arguments passed to this method. Used for logging in `self.invocations`.
+    /// - parameter returns: A closure to be executed by default when this function is invoked.
+    func registerThrowingInvocation<T>(for method: MockMethod,
+                                       function: String,
+                                       args: Any?...,
+                                       returns: ([Any?]) throws -> T) throws -> T
+    
+    /// Adds the signature of the containing function to `self.invocations` and
+    /// performs the block registered for `method`, if any. The return closure
+    /// receives the method's arguments as an `[Any?]`.
+    /// - parameter method: The method ID to register the invocation for.
+    /// - parameter function: Set automatically to `#function`.
+    /// - parameter args: The arguments passed to this method. Used for logging in `self.invocations`.
+    /// - parameter value: A value to return with when this function is invoked.
+    func registerThrowingInvocation<T>(for method: MockMethod,
+                                       function: String,
+                                       args: Any?...,
+                                       andReturn value: T?) throws -> T?
+
+    /// Adds the signature of the containing function to `self.invocations` and
+    /// performs the block registered for `method`, if any. The return closure
+    /// receives the method's arguments as an `[Any?]`.
+    /// - parameter method: The method ID to register the invocation for.
+    /// - parameter function: Set automatically to `#function`.
+    /// - parameter args: The arguments passed to this method. Used for logging in `self.invocations`.
+    /// - parameter value: A value to return with when this function is invoked.
+    func registerThrowingInvocation<T>(for method: MockMethod,
+                                       function: String,
+                                       args: Any?...,
+                                       andReturn value: T) throws -> T
+    
+    /// Adds the signature of the containing function to `self.invocations` and
+    /// performs the block registered for `method`, if any. The return closure
+    /// receives the method's arguments as an `[Any?]`.
+    /// - parameter method: The method ID to register the invocation for.
+    /// - parameter function: Set automatically to `#function`.
+    /// - parameter args: The arguments passed to this method. Used for logging in `self.invocations`.
+    /// - parameter returns: A closure to be executed by default when this function is invoked.
+    func registerThrowingInvocation(for method: MockMethod,
+                                    function: String,
+                                    args: Any?...,
+                                    returns: ([Any?]) throws -> Void) throws
+
     /// Unregisters all stubs and erases the invocation log
     func resetMock()
 
@@ -118,13 +179,13 @@ public protocol Mock {
     /// - parameter method: The identifier passed to `registerInvocation()` in the function to be stubbed.
     /// - parameter block: A block with the same return type as the function being mocked. 
     ///                    If a closuer of the incorrect type is registered, a runtime error will result.
-    func stub<T>(_ method: MockMethod, withBlock block: @escaping ([Any?]) -> T)
+    func stub<T>(_ method: MockMethod, withBlock block: @escaping ([Any?]) throws -> T)
 
     /// Call this method to stub the method identified by `method`.
     /// - parameter method: The identifier passed to `registerInvocation()` in the function to be stubbed.
     /// - parameter block: A block with the same return type as the function being mocked. 
     ///                    If a closuer of the incorrect type is registered, a runtime error will result.
-    func stub<T>(_ method: MockMethod, withBlock block: @escaping ([Any?]) -> T?)
+    func stub<T>(_ method: MockMethod, withBlock block: @escaping ([Any?]) throws -> T?)
     
     /// Call this method to stub the method identified by `method`.
     /// - parameter method: The identifier passed to `registerInvocation()` in the function to be stubbed.
