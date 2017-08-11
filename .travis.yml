@@ -1,4 +1,4 @@
-osx_image: xcode8.2
+osx_image: xcode8.3
 language: objective-c
 matrix:
   include:
@@ -10,8 +10,8 @@ matrix:
       script:
         - set -o pipefail
         - xcodebuild clean build test -project MockSix.xcodeproj -scheme MockSix-macOS | xcpretty
-        - xcodebuild clean build test -project MockSix.xcodeproj -scheme MockSix-iOS -destination 'id=E40727B3-41FB-4D6E-B4CB-BFA87109EB12' | xcpretty
-        - xcodebuild clean build test -project MockSix.xcodeproj -scheme MockSix-tvOS -destination 'id=5761D8AB-2838-4681-A528-D0949FF240C5' | xcpretty
+        - xcodebuild clean build test -project MockSix.xcodeproj -scheme MockSix-iOS -destination 'id=D7CED6E9-68A5-4FE9-9AC5-CC16467E1EC0' | xcpretty
+        - xcodebuild clean build test -project MockSix.xcodeproj -scheme MockSix-tvOS -destination 'id=46E4E8E3-9ADB-457C-8B8E-802EE1025E7F' | xcpretty
         - pod lib lint
     - os: osx
       language: generic
