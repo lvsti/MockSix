@@ -40,6 +40,10 @@ class MockDummy: Mock {
     }
 }
 
+enum DummyError: Error {
+    case somethingBadHappened
+}
+
 
 class MockSixSpec: QuickSpec {
     override func spec() {
@@ -368,7 +372,7 @@ class MockSixSpec: QuickSpec {
                             // given
                             func nestedFunc() throws {
                                 _ = try dummy.registerThrowingInvocation(for: .myFunc) { _ -> [Int] in
-                                    throw NSError(domain: "MockSix", code: -1, userInfo: nil)
+                                    throw DummyError.somethingBadHappened
                                 }
                             }
                             
@@ -388,7 +392,7 @@ class MockSixSpec: QuickSpec {
                             // when
                             do {
                                 _ = try dummy.registerThrowingInvocation(for: .myFunc, args: "aaa", 42, nil, 3.14) { _ -> [Int] in
-                                    throw NSError(domain: "MockSix", code: -1, userInfo: nil)
+                                    throw DummyError.somethingBadHappened
                                 }
                             }
                             catch {
@@ -412,7 +416,7 @@ class MockSixSpec: QuickSpec {
                             // when
                             do {
                                 _ = try dummy.registerThrowingInvocation(for: .myFunc, args: "aaa", 42, nil, 3.14) { _ -> [Int] in
-                                    throw NSError(domain: "MockSix", code: -1, userInfo: nil)
+                                    throw DummyError.somethingBadHappened
                                 }
                             }
                             catch {
@@ -476,7 +480,7 @@ class MockSixSpec: QuickSpec {
                             // given
                             func nestedFunc() throws {
                                 _ = try dummy.registerThrowingInvocation(for: .myFunc) { _ -> [Int]? in
-                                    throw NSError(domain: "MockSix", code: -1, userInfo: nil)
+                                    throw DummyError.somethingBadHappened
                                 }
                             }
                             
@@ -496,7 +500,7 @@ class MockSixSpec: QuickSpec {
                             // when
                             do {
                                 _ = try dummy.registerThrowingInvocation(for: .myFunc, args: "aaa", 42, nil, 3.14) { _ -> [Int]? in
-                                    throw NSError(domain: "MockSix", code: -1, userInfo: nil)
+                                    throw DummyError.somethingBadHappened
                                 }
                             }
                             catch {
@@ -520,7 +524,7 @@ class MockSixSpec: QuickSpec {
                             // when
                             do {
                                 _ = try dummy.registerThrowingInvocation(for: .myFunc, args: "aaa", 42, nil, 3.14) { _ -> [Int]? in
-                                    throw NSError(domain: "MockSix", code: -1, userInfo: nil)
+                                    throw DummyError.somethingBadHappened
                                 }
                             }
                             catch {
@@ -576,7 +580,7 @@ class MockSixSpec: QuickSpec {
                             // given
                             func nestedFunc() throws {
                                 _ = try dummy.registerThrowingInvocation(for: .myFunc) { _ in
-                                    throw NSError(domain: "MockSix", code: -1, userInfo: nil)
+                                    throw DummyError.somethingBadHappened
                                 }
                             }
                             
@@ -596,7 +600,7 @@ class MockSixSpec: QuickSpec {
                             // when
                             do {
                                 _ = try dummy.registerThrowingInvocation(for: .myFunc, args: "aaa", 42, nil, 3.14) { _ in
-                                    throw NSError(domain: "MockSix", code: -1, userInfo: nil)
+                                    throw DummyError.somethingBadHappened
                                 }
                             }
                             catch {
@@ -620,7 +624,7 @@ class MockSixSpec: QuickSpec {
                             // when
                             do {
                                 _ = try dummy.registerThrowingInvocation(for: .myFunc, args: "aaa", 42, nil, 3.14) { _ in
-                                    throw NSError(domain: "MockSix", code: -1, userInfo: nil)
+                                    throw DummyError.somethingBadHappened
                                 }
                             }
                             catch {
@@ -732,7 +736,7 @@ class MockSixSpec: QuickSpec {
 
                     beforeEach {
                         dummy.stub(.myFunc) { _ -> Int in
-                            throw NSError(domain: "MockSix", code: -1, userInfo: nil)
+                            throw DummyError.somethingBadHappened
                         }
                     }
                     
@@ -800,7 +804,7 @@ class MockSixSpec: QuickSpec {
                     
                     beforeEach {
                         dummy.stub(.myFunc) { _ -> Int? in
-                            throw NSError(domain: "MockSix", code: -1, userInfo: nil)
+                            throw DummyError.somethingBadHappened
                         }
                     }
                     
