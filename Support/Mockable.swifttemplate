@@ -1,0 +1,249 @@
+import MockSix
+
+@testable import <# TARGET MODULE NAME #>
+
+protocol DefaultInitializable {
+    init()
+}
+
+class Dummy<T> {}
+
+extension Dummy where T : DefaultInitializable {
+    static var value: T { return T() }
+}
+
+<%
+let abbreviations = ["api", "id", "json", "uri", "url", "xml"]
+
+func camelCaseComponents(from string: String) -> [String] {
+    if string.isEmpty {
+        return []
+    }
+    
+    let pattern = "(?<=[A-Z])(?=[A-Z][a-z])|(?<=[^A-Z])(?=[A-Z])"
+    let camelSplitterRegex = try! NSRegularExpression(pattern: pattern, options: [])
+    let nsStr = string as NSString
+    
+    var splitLocations = camelSplitterRegex
+        .matches(in: string, options: [], range: NSRange(location: 0, length: nsStr.length))
+        .map { $0.range.location }
+    splitLocations.append(nsStr.length)
+    
+    let components = splitLocations
+        .reduce(([String](), 0)) { acc, loc in
+            var comps = acc.0
+            comps.append(nsStr.substring(with: NSRange(location: acc.1, length: loc - acc.1)))
+            return (comps, loc)
+        }
+        .0
+    
+    return components
+}
+
+func pascalCasedString(from components: [String]) -> String {
+    if components.isEmpty {
+        return ""
+    }
+    
+    var pascalCased = components.map {
+        abbreviations.contains($0.lowercased()) ? $0.uppercased() : $0.lowercased().capitalized
+    }
+    if abbreviations.contains(pascalCased[0]) {
+        pascalCased[0] = pascalCased[0].uppercased()
+    }
+    return pascalCased.joined()
+}
+
+func camelCasedString(from components: [String]) -> String {
+    if components.isEmpty {
+        return ""
+    }
+    
+    var pascalCased = components.map {
+        abbreviations.contains($0.lowercased()) ? $0.uppercased() : $0.lowercased().capitalized
+    }
+    pascalCased[0] = pascalCased[0].lowercased()
+    return pascalCased.joined()
+}
+
+func lowerFirstWord(of string: String) -> String {
+    return camelCasedString(from: camelCaseComponents(from: string))
+}
+
+func upperFirstWord(of string: String) -> String {
+    return pascalCasedString(from: camelCaseComponents(from: string))
+}
+
+
+func mockClassName(for type: Type) -> String {
+    var className = type.name
+    if className.hasSuffix("Protocol") {
+        let nsName = className as NSString
+        className = nsName.substring(to: nsName.length - 8)
+    }
+    return "Mock" + className
+}
+
+var dummyValueTypes: [String: (Type?, TypeName)] = [:]
+
+func dummyValue(for type: Type?, typeName: TypeName) -> String {
+    if typeName.isOptional || typeName.isImplicitlyUnwrappedOptional {
+        return "nil"
+    }
+    else if typeName.isArray {
+        return "[]"
+    }
+    else if typeName.isDictionary {
+        return "[:]"
+    }
+    else if typeName.isTuple, let tuple = typeName.tuple {
+        let list = tuple.elements
+            .flatMap { dummyValue(for: $0.type, typeName: $0.typeName) }
+            .joined(separator: ", ")
+        
+        return "(" + list + ")"
+    }
+    else if typeName.isClosure, let closure = typeName.closure {
+        if closure.returnTypeName.isVoid {
+            return "{ _ in }"
+        }
+        else {
+            return "{ _ in " + dummyValue(for: closure.returnType, typeName: closure.returnTypeName) + " }"
+        }
+    }
+    else if let type = type, type.kind == "protocol", type.annotations["mockable"] != nil {
+        return mockClassName(for: type) + "() as " + typeName.name
+    }
+    else {
+        dummyValueTypes[typeName.name] = (type, typeName)
+        return "Dummy<" + typeName.name + ">.value"
+    }
+}
+
+func methodID(for method: SourceryRuntime.Method) -> String {
+    if let annotation = method.annotations["mockMethodID"] {
+        return annotation as! String
+    }
+    
+    let tail = method.parameters
+        .map { param in
+            guard let label = param.argumentLabel, label != param.name else {
+                return lowerFirstWord(of: param.name)
+            }
+            
+            if label.hasSuffix(upperFirstWord(of: param.name)) {
+                return lowerFirstWord(of: label)
+            }
+            else {
+                return lowerFirstWord(of: label) + upperFirstWord(of: param.name)
+            }
+        }
+        .joined(separator: "_")
+    
+    return method.callName + (tail.isEmpty ? "" : "_" + tail)
+}
+
+func methodSignature(for method: SourceryRuntime.Method, usingHangingIndentation: Bool = false) -> String {
+    let indentation = usingHangingIndentation ?
+        "\n" + String(repeating: " ", count: (method.shortName as NSString).length + 1) :
+    " "
+    
+    let paramList = method.parameters
+        .map { param in
+            var argLabel = ""
+            if let label = param.argumentLabel {
+                if label != param.name {
+                    argLabel = label + " "
+                }
+            }
+            else {
+                argLabel = "_ "
+            }
+            return argLabel + param.name + ": " + param.typeName.name
+        }
+        .joined(separator: "," + indentation)
+    
+    let throwsAnnotation = method.throws ? " throws" : method.rethrows ? " rethrows" : ""
+    let returns = method.returnTypeName.isVoid ? "" : " -> " + method.returnTypeName.name
+    
+    return method.shortName + "(" + paramList + ")" + throwsAnnotation + returns
+}
+
+var result = ""
+
+for proto in types.protocols where proto.annotations["mockable"] != nil {
+    result += "class " + mockClassName(for: proto) + ": NSObject, " + proto.name + ", Mock {\n"
+    
+    if !proto.allMethods.isEmpty {
+        result += "    enum Methods: Int {\n"
+        for method in proto.allMethods where !method.isInitializer {
+            result += "        /// " + methodSignature(for: method) + "\n"
+            result += "        case " + methodID(for: method) + "\n"
+        }
+        result += "    }\n    typealias MockMethod = Methods\n"
+    }
+    else {
+        result += "    typealias MockMethod = Int\n"
+    }
+    
+    for method in proto.allMethods where !method.isInitializer {
+        for (attrName, attr) in method.attributes {
+            result += "    " + attr.description + "\n"
+        }
+        
+        let signature = methodSignature(for: method, usingHangingIndentation: true)
+        result += "    func " + signature.replacingOccurrences(of: "\n", with: "\n         ") + " {\n"
+        
+        if method.returnTypeName.isVoid {
+            result += "        registerInvocation(for: ." + methodID(for: method)
+            if !method.parameters.isEmpty {
+                result += ",\n                           args: "
+                result += method.parameters.map { $0.name }.joined(separator: ", ")
+            }
+            result += ")\n"
+        }
+        else {
+            result += "        return registerInvocation(for: ." + methodID(for: method)
+            if !method.parameters.isEmpty {
+                result += ",\n                                  args: "
+                result += method.parameters.map { $0.name }.joined(separator: ", ")
+            }
+            result += ",\n                                  andReturn: "
+            result += dummyValue(for: method.returnType, typeName: method.returnTypeName)
+            result += ")\n"
+        }
+        
+        result += "    }\n"
+    }
+    
+    for variable in proto.allVariables {
+        for (attrName, attr) in variable.attributes {
+            result += "    " + attr.description + "\n"
+        }
+        
+        result += "    var " + variable.name + ": " + variable.typeName.name + " = "
+        result += dummyValue(for: variable.type, typeName: variable.typeName)
+        result += "\n"
+    }
+    
+    result += "}\n\n"
+}
+
+for (name, (type, typeName)) in dummyValueTypes {
+    guard let type = type else {
+        continue
+    }
+    
+    let suitableInits = type.initializers.filter {
+        $0.isInitializer && !$0.isFailableInitializer && !$0.throws && !$0.rethrows && $0.parameters.isEmpty
+    }
+    
+    guard !suitableInits.isEmpty else {
+        continue
+    }
+    
+    result += "extension " + name + ": DefaultInitializable {}\n"
+}
+
+%><%= result %>
+
