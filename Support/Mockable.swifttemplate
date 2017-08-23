@@ -146,7 +146,7 @@ func methodID(for method: SourceryRuntime.Method) -> String {
 func methodSignature(for method: SourceryRuntime.Method, usingHangingIndentation: Bool = false) -> String {
     let indentation = usingHangingIndentation ?
         "\n" + String(repeating: " ", count: (method.shortName as NSString).length + 1) :
-    " "
+        " "
     
     let paramList = method.parameters
         .map { param in
@@ -194,25 +194,27 @@ for proto in types.protocols where proto.annotations["mockable"] != nil {
         let signature = methodSignature(for: method, usingHangingIndentation: true)
         result += "    func " + signature.replacingOccurrences(of: "\n", with: "\n         ") + " {\n"
         
-        if method.returnTypeName.isVoid {
-            result += "        registerInvocation(for: ." + methodID(for: method)
-            if !method.parameters.isEmpty {
-                result += ",\n                           args: "
-                result += method.parameters.map { $0.name }.joined(separator: ", ")
-            }
-            result += ")\n"
-        }
-        else {
-            result += "        return registerInvocation(for: ." + methodID(for: method)
-            if !method.parameters.isEmpty {
-                result += ",\n                                  args: "
-                result += method.parameters.map { $0.name }.joined(separator: ", ")
-            }
-            result += ",\n                                  andReturn: "
-            result += dummyValue(for: method.returnType, typeName: method.returnTypeName)
-            result += ")\n"
+        let registerCall =
+            "        " +
+            (method.returnTypeName.isVoid ? "" : "return ") +
+            (method.throws || method.rethrows ? "try registerThrowingInvocation" : "registerInvocation") +
+            "("
+        
+        let hangingIndentation = String(repeating: " ", count: (registerCall as NSString).length)
+        
+        result += registerCall + "for: ." + methodID(for: method)
+        
+        if !method.parameters.isEmpty {
+            result += ",\n" + hangingIndentation + "args: "
+            result += method.parameters.map { $0.name }.joined(separator: ", ")
         }
         
+        if !method.returnTypeName.isVoid {
+            result += ",\n" + hangingIndentation + "andReturn: "
+            result += dummyValue(for: method.returnType, typeName: method.returnTypeName)
+        }
+        
+        result += ")\n"
         result += "    }\n"
     }
     
