@@ -54,8 +54,6 @@ mock.stub(.myFunc, andReturn: [42])
 mock.myFunc("foobar") == [42]   // true
 ```
 
-See the [Usage](#usage) section for more examples.
-
 ### Requirements
 
 To build: Swift 3.1 <br/>
@@ -89,9 +87,12 @@ let package = Package(
 
 Or just add `MockSix.swift` and `MockSixInternal.swift` to your test target.
 
-### Usage
+### Other stuff
 
-TODO
+I also wrote two blogposts about MockSix which may help you get started:
+
+- [Lightweight Object Mocking in Swift](https://lvsti.github.io/cocoagrinder/2017/01/06/lightweight-object-mocking-in-swift.html): motivation and design decisions, and also an overview of the MockSix [Nimble matchers](https://github.com/lvsti/NimbleMockSix)
+- [MockSix + Sourcery: Happily Ever After?](https://lvsti.github.io/cocoagrinder/2017/08/19/mocksix-sourcery.html): how to use [Sourcery](https://github.com/krzysztofzablocki/Sourcery) to automatically generate MockSix-style mocks without writing a single line of boilerplate
 
 ### License
 
