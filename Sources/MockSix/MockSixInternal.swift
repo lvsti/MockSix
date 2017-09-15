@@ -286,7 +286,7 @@ public func resetMockSix() {
 
 
 public func lock(prefix: String = #file + ":\(#line):") -> String {
-    let suffix = mockQueue.sync { _ -> String in
+    let suffix = mockQueue.sync { () -> String in
         globalObjectIDIndex += 1
         return "\(globalObjectIDIndex)"
     }
