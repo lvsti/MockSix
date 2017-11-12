@@ -192,7 +192,8 @@ for proto in types.protocols where proto.annotations["mockable"] != nil {
         }
         
         let signature = methodSignature(for: method, usingHangingIndentation: true)
-        result += "    func " + signature.replacingOccurrences(of: "\n", with: "\n         ") + " {\n"
+        result += "    " + (method.isStatic ? "static " : "") + 
+            "func " + signature.replacingOccurrences(of: "\n", with: "\n         ") + " {\n"
         
         let registerCall =
             "        " +
@@ -223,7 +224,7 @@ for proto in types.protocols where proto.annotations["mockable"] != nil {
             result += "    " + attr.description + "\n"
         }
         
-        result += "    var " + variable.name + ": " + variable.typeName.name + " = "
+        result += "    " + (variable.isStatic ? "static " : "") + "var " + variable.name + ": " + variable.typeName.name + " = "
         result += dummyValue(for: variable.type, typeName: variable.typeName)
         result += "\n"
     }
