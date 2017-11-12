@@ -1,3 +1,4 @@
+// swift-tools-version:4.0
 //
 //  Package.swift
 //  MockSix
@@ -29,5 +30,12 @@
 import PackageDescription
 
 let package = Package(
-    name: "MockSix"
+    name: "MockSix",
+    targets: [
+        .target(
+            name: "MockSix",
+            dependencies: [],
+            path: "Sources"
+        ),
+    ]
 )
