@@ -33,7 +33,7 @@ let package = Package(
     name: "MockSix",
     dependencies: [
         .package(url: "https://github.com/Quick/Quick.git", from: "1.2.0"),
-        .package(url: "https://github.com/Quick/Nimble.git", from: "7.0.0"),
+        .package(url: "https://github.com/Quick/Nimble.git", from: "7.0.2"),
     ],
     targets: [
         .target(
@@ -42,9 +42,10 @@ let package = Package(
             path: "Sources"
         ),
         .testTarget(
-            name: "MockSix-macOS",
-            dependencies: ["MockSix", "Quick", "Nimble"],
-            path: "Tests"
+            name: "MockSixTests",
+            dependencies: ["MockSix", "Quick", "Nimble"]
         )
-    ]
+    ],
+    swiftLanguageVersions: [4]
 )
+
