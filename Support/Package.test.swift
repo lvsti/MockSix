@@ -33,7 +33,7 @@ let package = Package(
     name: "MockSix",
     dependencies: [
         .package(url: "https://github.com/Quick/Quick.git", from: "1.2.0"),
-        .package(url: "https://github.com/Quick/Nimble.git", from: "7.0.2"),
+        .package(url: "https://github.com/Quick/Nimble.git", .branch("SR-6419-workaround")),
     ],
     targets: [
         .target(
