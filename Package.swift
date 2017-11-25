@@ -31,11 +31,15 @@ import PackageDescription
 
 let package = Package(
     name: "MockSix",
+    products: [
+        .library(name: "MockSix", targets: ["MockSix"]),
+    ],
     targets: [
         .target(
             name: "MockSix",
             dependencies: [],
             path: "Sources"
         ),
-    ]
+    ],
+    swiftLanguageVersions: [4]
 )
