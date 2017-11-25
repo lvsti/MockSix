@@ -52,11 +52,13 @@ let mock = MockMyClass()
 mock.myFunc("foobar") == []     // true
 mock.stub(.myFunc, andReturn: [42])
 mock.myFunc("foobar") == [42]   // true
+mock.stub(.myFunc) { $0.isEmpty ? [] : [42] }
+mock.myFunc("foobar") == [42]   // true
 ```
 
 ### Requirements
 
-To build: Swift 3.1 <br/>
+To build: Swift 4 <br/>
 To use: macOS 10.10+, iOS 8.4+, tvOS 9.2+, Linux
 
 ### Installation
@@ -76,12 +78,20 @@ github "lvsti/MockSix"
 Via the Swift Package Manager: add it to the dependencies in your Package.swift:
 
 ```swift
+// swift-tools-version:4.0
 let package = Package(
     name: "MyAwesomeApp",
     dependencies: [
-        .Package(url: "https://github.com/lvsti/MockSix", majorVersion: 0),
+        .package(url: "https://github.com/lvsti/MockSix", from: "0.1.7"),
         // ... other dependencies ...
-    ]
+    ],
+    targets: [
+        .target(name: "MyAwesomeApp", dependencies: []),
+        .testTarget(
+            name: "MyAwesomeAppTests",
+            dependencies: ["MyAwesomeApp", "MockSix"]
+        )
+    ],
 )
 ```
 
