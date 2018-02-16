@@ -1,0 +1,69 @@
+<%
+
+enum SyntaxUtils {
+    
+    enum SyntaxType {
+        case arrayBegin
+        case arrayEnd
+        case dictionaryBegin
+        case dictionarySeparator
+        case dictionaryEnd
+        case tupleBegin
+        case tupleSeparator
+        case tupleEnd
+        case closureParameterListBegin
+        case closureParameterSeparator
+        case closureParameterListEnd
+        case closureArrow
+        case closureReturnBegin
+        case closureReturnEnd
+        case type(TypeName)
+    }
+    
+    static func visit(_ typeName: TypeName, using block: @escaping (SyntaxType) -> Bool) {
+        func innerVisit(_ typeName: TypeName) -> Bool {
+            if typeName.isArray, let array = typeName.array {
+                return
+                    block(.arrayBegin) &&
+                    innerVisit(array.elementTypeName) &&
+                    block(.arrayEnd)
+            }
+            else if typeName.isDictionary, let dict = typeName.dictionary {
+                return
+                    block(.dictionaryBegin) &&
+                    innerVisit(dict.keyTypeName) &&
+                    block(.dictionarySeparator) &&
+                    innerVisit(dict.valueTypeName) &&
+                    block(.dictionaryEnd)
+            }
+            else if typeName.isTuple, let tuple = typeName.tuple {
+                let elemCount = tuple.elements.count
+                return
+                    block(.tupleBegin) &&
+                    !tuple.elements.enumerated().contains(where: { idx, elem in
+                        return !innerVisit(elem.typeName) || (idx < elemCount - 1 && !block(.tupleSeparator))
+                    }) &&
+                    block(.tupleEnd)
+            }
+            else if typeName.isClosure, let closure = typeName.closure {
+                let paramCount = closure.parameters.count
+                return
+                    block(.closureParameterListBegin) &&
+                    !closure.parameters.enumerated().contains(where: { idx, param in
+                        return !innerVisit(param.typeName) || (idx < paramCount - 1 && !block(.closureParameterSeparator))
+                    }) &&
+                    block(.closureParameterListEnd) &&
+                    block(.closureArrow) &&
+                    block(.closureReturnBegin) &&
+                    innerVisit(closure.returnTypeName) &&
+                    block(.closureReturnEnd)
+            }
+            
+            return block(.type(typeName))
+        }
+
+        _ = innerVisit(typeName)
+    }
+}
+
+%>

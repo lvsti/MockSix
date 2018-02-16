@@ -1,0 +1,51 @@
+<%
+
+enum TypeUtils {
+    
+    static func constituentTypeNames(in typeName: TypeName) -> [TypeName] {
+        var constituentTypeNames: [TypeName] = []
+        
+        func process(_ typeName: TypeName) {
+            if typeName.isArray, let array = typeName.array {
+                process(array.elementTypeName)
+            }
+            else if typeName.isDictionary, let dict = typeName.dictionary {
+                process(dict.keyTypeName)
+                process(dict.valueTypeName)
+            }
+            else if typeName.isTuple, let tuple = typeName.tuple {
+                tuple.elements.forEach { process($0.typeName) }
+            }
+            else if typeName.isClosure, let closure = typeName.closure {
+                process(closure.returnTypeName)
+                closure.parameters.forEach { process($0.typeName) }
+            }
+            else {
+                constituentTypeNames.append(typeName)
+            }
+        }
+        
+        process(typeName)
+        
+        return constituentTypeNames
+    }
+
+    static func protocolHasSelfRequirement(_ proto: SourceryProtocol) -> Bool {
+        func hasSelfRequirement(_ typeName: TypeName) -> Bool {
+            return TypeUtils.constituentTypeNames(in: typeName).contains { $0.unwrappedTypeName == "Self" }
+        }
+        
+        for method in proto.allMethods {
+            guard
+                !hasSelfRequirement(method.returnTypeName) &&
+                !method.parameters.contains(where: { hasSelfRequirement($0.typeName) })
+            else {
+                return true
+            }
+        }
+        return false
+    }
+
+}
+
+%>

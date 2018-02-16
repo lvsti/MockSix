@@ -12,68 +12,10 @@ extension Dummy where T : DefaultInitializable {
     static var value: T { return T() }
 }
 
+<%- include("CaseUtils.swifttemplate") %>
+
 <%
-let abbreviations = ["api", "id", "json", "uri", "url", "xml"]
-
-func camelCaseComponents(from string: String) -> [String] {
-    if string.isEmpty {
-        return []
-    }
-    
-    let pattern = "(?<=[A-Z])(?=[A-Z][a-z])|(?<=[^A-Z])(?=[A-Z])"
-    let camelSplitterRegex = try! NSRegularExpression(pattern: pattern, options: [])
-    let nsStr = string as NSString
-    
-    var splitLocations = camelSplitterRegex
-        .matches(in: string, options: [], range: NSRange(location: 0, length: nsStr.length))
-        .map { $0.range.location }
-    splitLocations.append(nsStr.length)
-    
-    let components = splitLocations
-        .reduce(([String](), 0)) { acc, loc in
-            var comps = acc.0
-            comps.append(nsStr.substring(with: NSRange(location: acc.1, length: loc - acc.1)))
-            return (comps, loc)
-        }
-        .0
-    
-    return components
-}
-
-func pascalCasedString(from components: [String]) -> String {
-    if components.isEmpty {
-        return ""
-    }
-    
-    var pascalCased = components.map {
-        abbreviations.contains($0.lowercased()) ? $0.uppercased() : $0.lowercased().capitalized
-    }
-    if abbreviations.contains(pascalCased[0]) {
-        pascalCased[0] = pascalCased[0].uppercased()
-    }
-    return pascalCased.joined()
-}
-
-func camelCasedString(from components: [String]) -> String {
-    if components.isEmpty {
-        return ""
-    }
-    
-    var pascalCased = components.map {
-        abbreviations.contains($0.lowercased()) ? $0.uppercased() : $0.lowercased().capitalized
-    }
-    pascalCased[0] = pascalCased[0].lowercased()
-    return pascalCased.joined()
-}
-
-func lowerFirstWord(of string: String) -> String {
-    return camelCasedString(from: camelCaseComponents(from: string))
-}
-
-func upperFirstWord(of string: String) -> String {
-    return pascalCasedString(from: camelCaseComponents(from: string))
-}
-
+CaseUtils.acronyms = ["api", "id", "json", "uri", "url", "xml"]
 
 func mockClassName(for type: Type) -> String {
     var className = type.name
@@ -128,14 +70,14 @@ func methodID(for method: SourceryRuntime.Method) -> String {
     let tail = method.parameters
         .map { param in
             guard let label = param.argumentLabel, label != param.name else {
-                return lowerFirstWord(of: param.name)
+                return CaseUtils.lowerFirstWord(of: param.name)
             }
             
             if label.hasSuffix(upperFirstWord(of: param.name)) {
-                return lowerFirstWord(of: label)
+                return CaseUtils.lowerFirstWord(of: label)
             }
             else {
-                return lowerFirstWord(of: label) + upperFirstWord(of: param.name)
+                return CaseUtils.lowerFirstWord(of: label) + CaseUtils.upperFirstWord(of: param.name)
             }
         }
         .joined(separator: "_")

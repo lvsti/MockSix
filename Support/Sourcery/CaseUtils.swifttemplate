@@ -1,0 +1,71 @@
+<%
+
+enum CaseUtils {
+    
+    static var acronyms: [String] = []
+
+    private static let camelSplitterRegex: NSRegularExpression = {
+        let pattern = "(?<=[A-Z])(?=[A-Z][a-z])|(?<=[^A-Z])(?=[A-Z])"
+        return try! NSRegularExpression(pattern: pattern, options: [])
+    }()
+
+    static func camelCaseComponents(from string: String) -> [String] {
+        if string.isEmpty {
+            return []
+        }
+        
+        let nsStr = string as NSString
+        
+        var splitLocations = camelSplitterRegex
+            .matches(in: string, options: [], range: NSRange(location: 0, length: nsStr.length))
+            .map { $0.range.location }
+        splitLocations.append(nsStr.length)
+        
+        let components = splitLocations
+            .reduce(([String](), 0)) { acc, loc in
+                var comps = acc.0
+                comps.append(nsStr.substring(with: NSRange(location: acc.1, length: loc - acc.1)))
+                return (comps, loc)
+            }
+            .0
+        
+        return components
+    }
+    
+    static func pascalCasedString(from components: [String]) -> String {
+        if components.isEmpty {
+            return ""
+        }
+        
+        var pascalCased = components.map {
+            acronyms.contains($0.lowercased()) ? $0.uppercased() : $0.lowercased().capitalized
+        }
+        if acronyms.contains(pascalCased[0]) {
+            pascalCased[0] = pascalCased[0].uppercased()
+        }
+        return pascalCased.joined()
+    }
+    
+    static func camelCasedString(from components: [String]) -> String {
+        if components.isEmpty {
+            return ""
+        }
+        
+        var pascalCased = components.map {
+            acronyms.contains($0.lowercased()) ? $0.uppercased() : $0.lowercased().capitalized
+        }
+        pascalCased[0] = pascalCased[0].lowercased()
+        return pascalCased.joined()
+    }
+    
+    static func lowerFirstWord(of string: String) -> String {
+        return camelCasedString(from: camelCaseComponents(from: string))
+    }
+    
+    static func upperFirstWord(of string: String) -> String {
+        return pascalCasedString(from: camelCaseComponents(from: string))
+    }
+
+}
+
+%>
