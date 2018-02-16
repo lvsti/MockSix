@@ -13,6 +13,8 @@ extension Dummy where T : DefaultInitializable {
 }
 
 <%- include("CaseUtils.swifttemplate") %>
+<%- include("TypeUtils.swifttemplate") %>
+<%- include("SyntaxUtils.swifttemplate") %>
 
 <%
 CaseUtils.acronyms = ["api", "id", "json", "uri", "url", "xml"]
@@ -27,6 +29,7 @@ func mockClassName(for type: Type) -> String {
 }
 
 var dummyValueTypes: [String: (Type?, TypeName)] = [:]
+var selfClassName: String!
 
 func dummyValue(for type: Type?, typeName: TypeName) -> String {
     if typeName.isOptional || typeName.isImplicitlyUnwrappedOptional {
@@ -57,8 +60,13 @@ func dummyValue(for type: Type?, typeName: TypeName) -> String {
         return mockClassName(for: type) + "() as " + typeName.name
     }
     else {
-        dummyValueTypes[typeName.name] = (type, typeName)
-        return "Dummy<" + typeName.name + ">.value"
+        if typeName.name == "Self" {
+            return selfClassName + "()"
+        }
+        else {
+            dummyValueTypes[typeName.name] = (type, typeName)
+            return "Dummy<" + typeName.name + ">.value"
+        }
     }
 }
 
@@ -101,20 +109,65 @@ func methodSignature(for method: SourceryRuntime.Method, usingHangingIndentation
             else {
                 argLabel = "_ "
             }
-            return argLabel + param.name + ": " + param.typeName.name
+
+            let paramTypeName: String
+            if !param.typeName.name.contains("Self") {
+                paramTypeName = param.typeName.name
+            }
+            else {
+                paramTypeName = rewrittenTypeName(param.typeName, byReplacingSelfWith: selfClassName)
+            }
+
+            return argLabel + param.name + ": " + paramTypeName
         }
         .joined(separator: "," + indentation)
     
     let throwsAnnotation = method.throws ? " throws" : method.rethrows ? " rethrows" : ""
-    let returns = method.returnTypeName.isVoid ? "" : " -> " + method.returnTypeName.name
+    let returnType = method.returnTypeName.name.contains("Self") ? 
+        rewrittenTypeName(method.returnTypeName, byReplacingSelfWith: selfClassName) : 
+        method.returnTypeName.name
+    let returns = method.returnTypeName.isVoid ? "" : " -> " + returnType
     
     return method.shortName + "(" + paramList + ")" + throwsAnnotation + returns
+}
+
+func rewrittenTypeName(_ typeName: TypeName, byReplacingSelfWith replacement: String) -> String {
+    var result = ""
+
+    SyntaxVisitor.visit(typeName) { syntax in
+        switch syntax {
+        case .arrayBegin: result += "["
+        case .arrayEnd: result += "]"
+        case .dictionaryBegin: result += "["
+        case .dictionarySeparator: result += ": "
+        case .dictionaryEnd: result += "]"
+        case .tupleBegin: result += "("
+        case .tupleSeparator: result += ", "
+        case .tupleEnd: result += ")"
+        case .closureParameterListBegin: result += "("
+        case .closureParameterSeparator: result += ", "
+        case .closureParameterListEnd: result += ")"
+        case .closureArrow: result += " -> "
+        case .closureReturnBegin: break
+        case .closureReturnEnd: break
+        case .type(let tn): result += tn.name != "Self" ? tn.name : replacement
+        }
+        return true
+    }
+
+    return result
 }
 
 var result = ""
 
 for proto in types.protocols where proto.annotations["mockable"] != nil {
-    result += "class " + mockClassName(for: proto) + ": NSObject, " + proto.name + ", Mock {\n"
+    let hasSelfReq = TypeUtils.protocolHasSelfRequirement(proto)
+    selfClassName = mockClassName(for: proto)
+
+    if hasSelfReq {
+        result += "final "
+    }
+    result += "class " + selfClassName + ": NSObject, " + proto.name + ", Mock {\n"
     
     if !proto.allMethods.isEmpty {
         result += "    enum Methods: Int {\n"
