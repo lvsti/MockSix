@@ -81,11 +81,12 @@ func methodID(for method: SourceryRuntime.Method) -> String {
                 return CaseUtils.lowerFirstWord(of: param.name)
             }
             
-            if label.hasSuffix(upperFirstWord(of: param.name)) {
+            let upperFirstParam = CaseUtils.upperFirstWord(of: param.name)
+            if label.hasSuffix(upperFirstParam) {
                 return CaseUtils.lowerFirstWord(of: label)
             }
             else {
-                return CaseUtils.lowerFirstWord(of: label) + CaseUtils.upperFirstWord(of: param.name)
+                return CaseUtils.lowerFirstWord(of: label) + upperFirstParam
             }
         }
         .joined(separator: "_")
@@ -134,7 +135,7 @@ func methodSignature(for method: SourceryRuntime.Method, usingHangingIndentation
 func rewrittenTypeName(_ typeName: TypeName, byReplacingSelfWith replacement: String) -> String {
     var result = ""
 
-    SyntaxVisitor.visit(typeName) { syntax in
+    SyntaxUtils.visit(typeName) { syntax in
         switch syntax {
         case .arrayBegin: result += "["
         case .arrayEnd: result += "]"
