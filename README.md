@@ -97,12 +97,124 @@ let package = Package(
 
 Or just add `MockSix.swift` and `MockSixInternal.swift` to your test target.
 
+### Usage
+
+##### Creating the mock implementation
+
+1. Conform to Mock besides the actual protocol you are creating the mock for:
+
+    ```swift
+    class MockFoobar: FoobarProtocol, Mock {
+    ```
+
+2. Declare an enum for the methods ("method ID") you want to make available in the mock and set it for the `MockMethod` typealias:
+
+    ```swift
+        enum Methods: Int {
+            case doThis
+            case doThat
+        }    
+        typealias MockMethod = Methods
+    ```
+    
+    The enum must have a `RawValue` of `Int`.
+
+3. Implement the methods by calling through `registerInvocation` or `registerThrowingInvocation`:
+
+    ```swift
+        func doThis(_ string: String, _ number: Int) -> [Int] {
+            return registerInvocation(for: .doThis, 
+                                      args: string, number, 
+                                      andReturn: [])
+        }
+        func doThat() throws -> Double {
+            return registerThrowingInvocation(for: .doThat, 
+                                              andReturn: 0.0)
+        }
+    ```
+        
+4. Define any properties mandated by the protocol:
+
+    ```swift
+        var stuff: Int = 0
+    }
+    ```
+
+##### Using the mock
+
+- call `resetMockSix()` at the beginning of each test (typically in a `beforeEach` block)
+
+- instantiate and inject as usual:
+
+    ```swift
+    let foobar = MockFoobar()
+    let sut = MyClass(foobar: foobar)
+    ```
+    
+- stub methods by referring to their method ID:
+
+    ```swift
+    // return value override
+    foobar.stub(.doThis, andReturn: [42])
+    
+    // replace implementation with closure
+    foobar.stub(.doThis) { (args: [Any?]) in
+        let num = args[1]! as! Int
+        return [num]
+    }
+    foobar.stub(.doThat) { _ in
+        if arc4random() % 2 == 1 { throw FoobarError.unknown }
+        return 3.14
+    }
+    
+    // invocation count aware stubbing
+    foobar.stub(.doThis, andReturn: [42], times: 1, afterwardsReturn: [43])
+    ```
+
+    CAVEAT: the return value type must exactly match that of the function, e.g. to return a conforming `SomeClass` instance from a function with `SomeClassProtocol` return type, use explicit casting:
+    
+    ```swift
+    foobar.stub(.whatever, andReturn: SomeClass() as SomeClassProtocol)
+    ```
+
+- remove stubs to restore the behavior defined in the mock implementation:
+
+    ```swift
+    foobar.unstub(.doThat)
+    ```
+
+- access raw invocation logs (if you really need to; otherwise you are better off with the [Nimble matchers](https://github.com/lvsti/NimbleMockSix)):
+
+    ```swift
+    // the mock has not been accessed
+    foobar.invocations.isEmpty
+    
+    // doThis(_:_:) has been called twice
+    foobar.invocations
+        .filter { $0.methodID == MockFoobar.Methods.doThis.rawValue }
+        .count == 2
+    
+    // doThis(_:_:) has been called with ("42", 42)
+    !foobar.invocations
+        .filter { 
+            $0.methodID == MockFoobar.Methods.doThis.rawValue &&
+            $0.args[0]! as! String == "42" &&
+            $0.args[1]! as! Int == 42
+        }
+        .isEmpty
+    ```
+
 ### Other stuff
 
 I also wrote two blogposts about MockSix which may help you get started:
 
 - [Lightweight Object Mocking in Swift](https://lvsti.github.io/cocoagrinder/2017/01/06/lightweight-object-mocking-in-swift.html): motivation and design decisions, and also an overview of the MockSix [Nimble matchers](https://github.com/lvsti/NimbleMockSix)
 - [MockSix + Sourcery: Happily Ever After?](https://lvsti.github.io/cocoagrinder/2017/08/19/mocksix-sourcery.html): how to use [Sourcery](https://github.com/krzysztofzablocki/Sourcery) to automatically generate MockSix-style mocks without writing a single line of boilerplate
+
+### Troubleshooting
+
+- Invocation logs are showing unrelated calls => try calling `resetMockSix()` in the setup phase of each test case
+- Test crashes with cast error => make sure the types of the returned values match the return type of the stubbed function; use explicit casting where required
 
 ### License
 
