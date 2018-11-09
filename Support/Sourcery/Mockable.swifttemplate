@@ -41,6 +41,9 @@ func dummyValue(for type: Type?, typeName: TypeName) -> String {
     else if typeName.isDictionary {
         return "[:]"
     }
+    else if typeName.isGeneric, let genType = typeName.generic, genType.name == "Set" {
+        return "[]"
+    }
     else if typeName.isTuple, let tuple = typeName.tuple {
         let list = tuple.elements
             .flatMap { dummyValue(for: $0.type, typeName: $0.typeName) }
