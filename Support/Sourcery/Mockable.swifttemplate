@@ -70,12 +70,8 @@ func dummyValue(for type: Type?, typeName: TypeName) -> String {
     }
 }
 
-func methodID(for method: SourceryRuntime.Method) -> String {
-    if let annotation = method.annotations["mockMethodID"] {
-        return annotation as! String
-    }
-    
-    let tail = method.parameters
+func encodedParameters(from params: [SourceryRuntime.MethodParameter]) -> String {
+    return params
         .map { param in
             guard let label = param.argumentLabel, label != param.name else {
                 return CaseUtils.lowerFirstWord(of: param.name)
@@ -90,16 +86,30 @@ func methodID(for method: SourceryRuntime.Method) -> String {
             }
         }
         .joined(separator: "_")
+}
+
+func methodID(forMethod method: SourceryRuntime.Method) -> String {
+    if let annotation = method.annotations["mockMethodID"] as? String {
+        return annotation
+    }
+    
+    let tail = encodedParameters(from: method.parameters)
     
     return method.callName + (tail.isEmpty ? "" : "_" + tail)
 }
 
-func methodSignature(for method: SourceryRuntime.Method, usingHangingIndentation: Bool = false) -> String {
-    let indentation = usingHangingIndentation ?
-        "\n" + String(repeating: " ", count: (method.shortName as NSString).length + 1) :
-        " "
+func methodID(forSubscript subscriptFunc: SourceryRuntime.Subscript) -> String {
+    if let annotation = subscriptFunc.annotations["mockMethodID"] as? String {
+        return annotation
+    }
     
-    let paramList = method.parameters
+    let tail = encodedParameters(from: subscriptFunc.parameters)
+    
+    return "subscript" + (tail.isEmpty ? "" : "_" + tail)
+}
+
+func parameterList(from parameters: [SourceryRuntime.MethodParameter], whitespace: String) -> String {
+    return parameters
         .map { param in
             var argLabel = ""
             if let label = param.argumentLabel {
@@ -121,7 +131,15 @@ func methodSignature(for method: SourceryRuntime.Method, usingHangingIndentation
 
             return argLabel + param.name + ": " + paramTypeName
         }
-        .joined(separator: "," + indentation)
+        .joined(separator: "," + whitespace)
+}
+
+func methodSignature(forMethod method: SourceryRuntime.Method, usingHangingIndentation: Bool = false) -> String {
+    let indentation = usingHangingIndentation ?
+        "\n" + String(repeating: " ", count: (method.shortName as NSString).length + 1) :
+        " "
+    
+    let paramList = parameterList(from: method.parameters, whitespace: indentation)
     
     let throwsAnnotation = method.throws ? " throws" : method.rethrows ? " rethrows" : ""
     let returnType = method.returnTypeName.name.contains("Self") ? 
@@ -130,6 +148,21 @@ func methodSignature(for method: SourceryRuntime.Method, usingHangingIndentation
     let returns = method.returnTypeName.isVoid ? "" : " -> " + returnType
     
     return method.shortName + "(" + paramList + ")" + throwsAnnotation + returns
+}
+
+func methodSignature(forSubscript subscriptFunc: SourceryRuntime.Subscript, usingHangingIndentation: Bool = false) -> String {
+    let indentation = usingHangingIndentation ?
+        "\n" + String(repeating: " ", count: ("subscript" as NSString).length + 1) :
+        " "
+    
+    let paramList = parameterList(from: subscriptFunc.parameters, whitespace: indentation)
+    
+    let returnType = subscriptFunc.returnTypeName.name.contains("Self") ? 
+        rewrittenTypeName(subscriptFunc.returnTypeName, byReplacingSelfWith: selfClassName) : 
+        subscriptFunc.returnTypeName.name
+    let returns = subscriptFunc.returnTypeName.isVoid ? "" : " -> " + returnType
+    
+    return "subscript(" + paramList + ")" + returns
 }
 
 func rewrittenTypeName(_ typeName: TypeName, byReplacingSelfWith replacement: String) -> String {
@@ -170,11 +203,21 @@ for proto in types.protocols where proto.annotations["mockable"] != nil {
     }
     result += "class " + selfClassName + ": NSObject, " + proto.name + ", Mock {\n"
     
-    if !proto.allMethods.isEmpty {
+    if !proto.allMethods.isEmpty || !proto.subscripts.isEmpty {
         result += "    enum Methods: Int {\n"
         for method in proto.allMethods where !method.isInitializer {
-            result += "        /// " + methodSignature(for: method) + "\n"
-            result += "        case " + methodID(for: method) + "\n"
+            result += "        /// " + methodSignature(forMethod: method) + "\n"
+            result += "        case " + methodID(forMethod: method) + "\n"
+        }
+        for sub in proto.subscripts {
+            let subID = methodID(forSubscript: sub)
+            let sig = methodSignature(forSubscript: sub)
+            result += "        /// " + sig + "\n"
+            result += "        case " + subID + "_getter\n"
+            if sub.isMutable {
+                result += "        /// " + sig + "\n"
+                result += "        case " + subID + "_setter\n"
+            }
         }
         result += "    }\n    typealias MockMethod = Methods\n"
     }
@@ -187,7 +230,7 @@ for proto in types.protocols where proto.annotations["mockable"] != nil {
             result += "    " + attr.description + "\n"
         }
         
-        let signature = methodSignature(for: method, usingHangingIndentation: true)
+        let signature = methodSignature(forMethod: method, usingHangingIndentation: true)
         result += "    " + (method.isStatic ? "static " : "") + 
             "func " + signature.replacingOccurrences(of: "\n", with: "\n         ") + " {\n"
         
@@ -199,7 +242,7 @@ for proto in types.protocols where proto.annotations["mockable"] != nil {
         
         let hangingIndentation = String(repeating: " ", count: (registerCall as NSString).length)
         
-        result += registerCall + "for: ." + methodID(for: method)
+        result += registerCall + "for: ." + methodID(forMethod: method)
         
         if !method.parameters.isEmpty {
             result += ",\n" + hangingIndentation + "args: "
@@ -212,6 +255,39 @@ for proto in types.protocols where proto.annotations["mockable"] != nil {
         }
         
         result += ")\n"
+        result += "    }\n"
+    }
+
+    for sub in proto.subscripts {
+        for (attrName, attr) in sub.attributes {
+            result += "    " + attr.description + "\n"
+        }
+        
+        let subID = methodID(forSubscript: sub)
+        let signature = methodSignature(forSubscript: sub, usingHangingIndentation: true)
+        result += "    " + signature.replacingOccurrences(of: "\n", with: "\n         ") + " {\n"
+
+        result += "        get {\n"
+        var registerCall = "            return registerInvocation("
+        var hangingIndentation = String(repeating: " ", count: (registerCall as NSString).length)
+        result += registerCall + "for: ." + subID + "_getter"
+        result += ",\n" + hangingIndentation + "args: "
+        result += sub.parameters.map { $0.name }.joined(separator: ", ")
+        result += ",\n" + hangingIndentation + "andReturn: "
+        result += dummyValue(for: sub.returnType, typeName: sub.returnTypeName)
+        result += ")\n"
+        result += "        }\n"
+
+        if sub.isMutable {
+            result += "        set {\n"
+            registerCall = "            registerInvocation("
+            hangingIndentation = String(repeating: " ", count: (registerCall as NSString).length)
+            result += registerCall + "for: ." + subID + "_setter"
+            result += ",\n" + hangingIndentation + "args: "
+            result += (sub.parameters.map { $0.name } + ["newValue"]).joined(separator: ", ")
+            result += ")\n"
+            result += "        }\n"
+        }
         result += "    }\n"
     }
     
