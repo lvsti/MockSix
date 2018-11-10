@@ -205,6 +205,10 @@ for proto in types.protocols where proto.annotations["mockable"] != nil {
         result += "final "
     }
     result += "class " + selfClassName + ": NSObject, " + proto.name + ", Mock {\n"
+
+    if !proto.staticMethods.isEmpty {
+        result += "    static let classMock = " + selfClassName + "()\n"
+    }
     
     if !proto.allMethods.isEmpty || !proto.subscripts.isEmpty {
         result += "    enum Methods: Int {\n"
@@ -237,10 +241,15 @@ for proto in types.protocols where proto.annotations["mockable"] != nil {
         result += "    " + (method.isStatic ? "static " : "") + 
             "func " + signature.replacingOccurrences(of: "\n", with: "\n         ") + " {\n"
         
+        let registerFunc = 
+            (method.isStatic ? "classMock." : "") +
+            (method.throws || method.rethrows ? "registerThrowingInvocation" : "registerInvocation")
+
         let registerCall =
             "        " +
             (method.returnTypeName.isVoid ? "" : "return ") +
-            (method.throws || method.rethrows ? "try registerThrowingInvocation" : "registerInvocation") +
+            (method.throws || method.rethrows ? "try " : "") +
+            registerFunc +
             "("
         
         let hangingIndentation = String(repeating: " ", count: (registerCall as NSString).length)
