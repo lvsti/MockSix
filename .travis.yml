@@ -11,7 +11,7 @@ matrix:
         - set -o pipefail
         - xcodebuild clean build test -project MockSix.xcodeproj -scheme MockSix-macOS | xcpretty
         - xcodebuild clean build test -project MockSix.xcodeproj -scheme MockSix-iOS -destination 'id=85AF1F51-F2EB-4A4D-930B-0E5761511A45' | xcpretty
-        - xcodebuild clean build test -project MockSix.xcodeproj -scheme MockSix-tvOS -destination 'id=810495B9-1EB7-43BB-96AF-0A3196C7A3B7' | xcpretty
+        - xcodebuild clean build test -project MockSix.xcodeproj -scheme MockSix-tvOS -destination 'id=9CBDF8C3-67EB-403E-8C3B-D4E31C25B708' | xcpretty
         - pod lib lint
     - os: osx
       language: generic
