@@ -15,6 +15,7 @@ DESC
   s.ios.deployment_target = '8.4'
   s.osx.deployment_target = '10.10'
   s.tvos.deployment_target = '9.2'
+  s.swift_version = '4.2'
   s.source_files = 'Sources/MockSix/*.{swift,h}'
   s.public_header_files = 'Sources/MockSix/MockSix.h'
 end
