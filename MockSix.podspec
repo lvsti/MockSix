@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = 'MockSix'
-  s.version = '0.1.7'
+  s.version = '0.2.0'
   s.license = 'MIT'
   s.summary = 'An object mocking microframework for Swift'
   s.description = <<-DESC
