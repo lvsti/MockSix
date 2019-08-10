@@ -10,7 +10,7 @@ matrix:
       script:
         - set -o pipefail
         - xcodebuild clean build test -project MockSix.xcodeproj -scheme MockSix-macOS | xcpretty
-        - xcodebuild clean build test -project MockSix.xcodeproj -scheme MockSix-iOS -destination 'id=85AF1F51-F2EB-4A4D-930B-0E5761511A45' | xcpretty
+        - xcodebuild clean build test -project MockSix.xcodeproj -scheme MockSix-iOS -destination 'id=B40F7090-26EE-4D2E-A7A2-C13E10EDA669' | xcpretty
         - xcodebuild clean build test -project MockSix.xcodeproj -scheme MockSix-tvOS -destination 'id=9CBDF8C3-67EB-403E-8C3B-D4E31C25B708' | xcpretty
         - pod lib lint
     - os: osx
