@@ -4,7 +4,7 @@
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-brightgreen.svg)](https://github.com/Carthage/Carthage)
 [![Swift Package Manager compatible](https://img.shields.io/badge/Swift%20Package%20Manager-compatible-brightgreen.svg)](https://swift.org/package-manager/)
 [![CocoaPods compatible](https://img.shields.io/cocoapods/v/MockSix.svg)](https://cocoapods.org/pods/MockSix)
-![Swift 4](https://img.shields.io/badge/Swift-4-orange.svg)
+![Swift 4.2](https://img.shields.io/badge/Swift-4.2-orange.svg)
 ![platforms](https://img.shields.io/badge/platforms-iOS%20%7C%20macOS%20%7C%20tvOS%20%7C%20Linux-lightgrey.svg)
 
 MockSix is a microframework to make object mocking in Swift somewhat easier. MockSix is built upon Daniel Burbank's [MockFive](https://github.com/DeliciousRaspberryPi/MockFive).
@@ -58,7 +58,7 @@ mock.myFunc("foobar") == [42]   // true
 
 ### Requirements
 
-To build: Swift 4 <br/>
+To build: Swift 4.2 <br/>
 To use: macOS 10.10+, iOS 8.4+, tvOS 9.2+, Linux
 
 ### Installation
